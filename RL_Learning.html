@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Roadmap: Generalization in Reinforcement Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Slate -->
+    <!-- Application Structure Plan: The SPA is designed as a non-linear, interactive roadmap to deconstruct the dense academic report. Instead of a long scroll, it's broken into thematic sections (Core Challenges, Foundations, Advanced Approaches, Practical Research). This modular structure, navigated by a sticky header, allows users to jump to specific areas of interest, making the content more digestible. Key interactions include a central concept map for high-level navigation, clickable cards for exploring challenges and approaches, and an interactive flowchart for the foundational knowledge path. This design was chosen to transform passive reading into active exploration, which is more effective for learning complex, interconnected topics. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Core RL Challenges -> Goal: Inform -> Viz/Method: Interactive HTML/CSS Cards -> Interaction: Click-to-reveal details, then "Ask Gemini" for deeper insight -> Justification: Breaks down complex problems into manageable, focused pieces, with AI support for further explanation.
+        - Report Info: Foundational Knowledge (Math, RL, DL) -> Goal: Organize/Guide -> Viz/Method: Interactive Flowchart (HTML/CSS Flexbox) -> Interaction: Click node to highlight path and show summary -> Justification: Visually represents the learning path, showing connections between disciplines, which is more intuitive than a list.
+        - Report Info: Advanced Generalization Approaches -> Goal: Compare/Inform -> Viz/Method: Grid of expandable HTML/CSS cards -> Interaction: Click to expand and read summary, then "Ask Gemini" for deeper insight -> Justification: Allows for quick scanning of many complex topics, with the option to drill down into specifics and get AI-generated explanations.
+        - Report Info: RL Frameworks -> Goal: Compare -> Viz/Method: Bar Chart (Chart.js) -> Interaction: Hover for tooltips -> Justification: Provides a quick, conceptual visual comparison of toolkits based on their primary research focus as described in the report.
+        - Library/Method: All visuals are implemented using HTML/CSS (Tailwind) and Chart.js (Canvas), adhering to the no-SVG/Mermaid constraint. The chart is placed in a properly styled, responsive container. Gemini API is integrated for on-demand explanations. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
+        }
+        .concept-node {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .concept-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .detail-card, .foundation-node-content {
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .detail-card.open, .foundation-node-content.open {
+            max-height: 1000px;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <a href="#home" class="text-xl font-bold text-slate-900">RL Gen Roadmap</a>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#challenges" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Challenges</a>
+                    <a href="#foundations" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Foundations</a>
+                    <a href="#approaches" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Approaches</a>
+                    <a href="#practice" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">In Practice</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+
+    <section id="home" class="text-center mb-24">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight">
+            Advancing Generalization in Reinforcement Learning
+        </h1>
+        <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">
+            An interactive guide for aspiring researchers. Explore the core challenges, foundational knowledge, advanced techniques, and practical skills needed to contribute to this cutting-edge field.
+        </p>
+        <div class="mt-12">
+            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Click a concept to explore</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <a href="#challenges" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🤔</div>
+                    <h3 class="font-bold text-slate-900">Core Challenges</h3>
+                </a>
+                <a href="#foundations" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🧱</div>
+                    <h3 class="font-bold text-slate-900">Foundations</h3>
+                </a>
+                <a href="#approaches" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🛠️</div>
+                    <h3 class="font-bold text-slate-900">Approaches</h3>
+                </a>
+                <a href="#practice" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🔬</div>
+                    <h3 class="font-bold text-slate-900">In Practice</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="challenges" class="mb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">The Core Challenges</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">Generalization in RL is distinct from supervised learning and presents unique hurdles. Click on each card to understand the key difficulties researchers face.</p>
+        </div>
+        <div id="challenges-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+    </section>
+
+    <section id="foundations" class="mb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">The Learning Path: Foundations</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">A strong theoretical base is non-negotiable. This interactive flowchart outlines the essential disciplines. Click each foundational block to see the required sub-topics.</p>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8" id="foundations-flowchart">
+        </div>
+        <div id="foundation-details-container" class="mt-8 max-w-4xl mx-auto"></div>
+    </section>
+
+    <section id="approaches" class="mb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">The Researcher's Toolkit: Advanced Approaches</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">Researchers use a variety of sophisticated methods to improve generalization. Explore these key areas by clicking on the cards below.</p>
+        </div>
+        <div id="approaches-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </div>
+    </section>
+
+    <section id="practice" class="mb-16 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">From Theory to Lab: Research in Practice</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">Beyond theory, successful research requires rigorous methodology and practical skills. This section covers experimental design, common pitfalls, and key tools.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div id="experimental-design">
+                <h3 class="text-2xl font-bold mb-4 text-slate-900">Principles of Experimental Design</h3>
+                <p class="text-slate-600 mb-6">Robust conclusions depend on sound experimental practices. Here are some key principles to uphold in your research.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                        <span class="text-2xl mr-4">🔄</span>
+                        <div>
+                            <h4 class="font-semibold">Performance & Stability</h4>
+                            <p class="text-slate-500 text-sm">Run experiments with multiple random seeds to characterize reliability and report performance distributions, not just averages.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                        <span class="text-2xl mr-4">⚙️</span>
+                        <div>
+                            <h4 class="font-semibold">Hyperparameter Management</h4>
+                            <p class="text-slate-500 text-sm">Conduct careful sensitivity analysis and avoid maximization bias. Ensure fair comparisons with comparable tuning effort for all algorithms.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                        <span class="text-2xl mr-4">🎯</span>
+                        <div>
+                            <h4 class="font-semibold">Environment Selection</h4>
+                            <p class="text-slate-500 text-sm">Start with simple diagnostic environments to isolate issues, then move to established benchmarks like Procgen for validation.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="common-pitfalls">
+                <h3 class="text-2xl font-bold mb-4 text-slate-900">Common Pitfalls to Avoid</h3>
+                <p class="text-slate-600 mb-6">Awareness of common errors is vital for research integrity. Watch out for these issues in your own work and when reviewing others'.</p>
+                <div class="space-y-3 text-slate-600">
+                    <p class="flex items-center"><span class="text-red-500 font-bold text-xl mr-3">✗</span> Averaging over too few runs.</p>
+                    <p class="flex items-center"><span class="text-red-500 font-bold text-xl mr-3">✗</span> Reusing hyperparameters without validation.</p>
+                    <p class="flex items-center"><span class="text-red-500 font-bold text-xl mr-3">✗</span> Failing to re-tune after ablations.</p>
+                    <p class="flex items-center"><span class="text-green-500 font-bold text-xl mr-3">✓</span> Control random seeds for agent & environment separately.</p>
+                    <p class="flex items-center"><span class="text-green-500 font-bold text-xl mr-3">✓</span> Include calibration baselines (e.g., random policy).</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-16">
+            <h3 class="text-2xl font-bold mb-4 text-center text-slate-900">A Look at RL Frameworks</h3>
+            <p class="text-slate-600 mb-8 max-w-2xl mx-auto text-center">Different toolkits serve different research goals. This chart provides a conceptual comparison of some popular frameworks based on their primary strengths.</p>
+            <div class="chart-container">
+                <canvas id="frameworksChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-800 text-slate-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <p class="font-semibold">Source Material</p>
+        <div class="mt-2 text-sm flex flex-col md:flex-row justify-center items-center gap-x-6 gap-y-2">
+            <a href="https://research.google/blog/improving-generalization-in-reinforcement-learning-using-policy-similarity-embeddings/" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">Google Research: Policy Similarity Embeddings</a>
+            <a href="https://arxiv.org/abs/2306.05483" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">arXiv: Latent Dynamics Mixture for Generalization in Meta-RL</a>
+        </div>
+        <p class="mt-6 text-xs text-slate-500">This interactive application was generated based on the provided research report to facilitate learning and exploration of generalization in RL.</p>
+    </div>
+</footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const contentData = {
+            challenges: [
+                { id: 'overfitting', title: 'Overfitting to Training Data', icon: '🎯', description: "A primary limitation where DRL policies perform well on training environments but fail significantly in novel ones. This is especially pronounced in Contextual MDPs, where agents struggle to generalize to unseen variations from the same family." },
+                { id: 'overestimation', title: 'Value Overestimation', icon: '📈', description: "A tendency of many value-based methods to overestimate state-action (Q) values. This bias can stem from statistical issues or function approximation errors, leading the agent to rely on spurious features and hindering true generalization." },
+                { id: 'inefficiency', title: 'Sample Inefficiency', icon: '💧', description: "Deep RL models often require vast amounts of interaction data to learn effective policies. This is a major barrier to generalization, as collecting diverse data for all possible unseen scenarios is often impractical or computationally prohibitive." }
+            ],
+            foundations: [
+                { id: 'math', title: 'Mathematics', icon: '🔢', content: [
+                        { name: 'Linear Algebra', desc: 'Core to data representation (vectors, matrices, tensors) and neural network operations.' },
+                        { name: 'Calculus', desc: 'Essential for understanding optimization via gradients and backpropagation.' },
+                        { name: 'Probability & Statistics', desc: 'Fundamental for modeling uncertainty, a key feature of RL environments.' },
+                    ]},
+                { id: 'rl', title: 'Core Reinforcement Learning', icon: '🤖', content: [
+                        { name: 'Markov Decision Processes (MDPs)', desc: 'The mathematical framework for modeling sequential decision-making.' },
+                        { name: 'Value & Policy Functions', desc: 'Key components an agent learns to estimate returns and select actions.' },
+                        { name: 'Core Algorithms (Q-Learning, Policy Gradients)', desc: 'The building blocks of modern DRL.' },
+                    ]},
+                { id: 'dl', title: 'Core Deep Learning', icon: '🧠', content: [
+                        { name: 'Neural Network Architectures', desc: 'Understanding CNNs, RNNs, and Transformers as function approximators.' },
+                        { name: 'Backpropagation', desc: 'The algorithm for training deep networks by propagating error gradients.' },
+                        { name: 'Optimization Algorithms', desc: 'Methods like SGD and Adam that adjust network weights to minimize loss.' },
+                    ]}
+            ],
+            approaches: [
+                { id: 'exploration', title: 'Exploration Strategies', icon: '🗺️', description: 'Beyond finding optimal policies, exploration is crucial for acquiring knowledge that helps in unseen environments. Techniques like EDE and UCB use uncertainty to drive exploration into informative but unknown states.' },
+                { id: 'representation', title: 'Representation Learning', icon: '🧩', description: 'Learning efficient and informative state representations is key. Concepts like "effective dimension" and methods like Successor Representation (SR) help agents generalize from learned features.' },
+                { id: 'regularization', title: 'Regularization', icon: '⚖️', description: 'Techniques adapted from supervised learning to prevent overfitting. This includes data augmentation, dropout, and adding penalties to the loss function to constrain model complexity.' },
+                { id: 'meta-rl', title: 'Meta-Reinforcement Learning', icon: '�', description: 'Aims to "learn to learn" by training on a distribution of tasks. This enables rapid adaptation to new, unseen tasks with minimal data. LDM is a novel approach in this area.' },
+                { id: 'transfer-learning', title: 'Transfer Learning', icon: '↪️', description: 'Leverages knowledge from external sources (e.g., expert demonstrations, pre-trained policies) to accelerate learning in a new target domain. Includes reward shaping and policy distillation.' },
+                { id: 'info-theory', title: 'Information-Theoretic', icon: '📊', description: 'Uses concepts like entropy and mutual information for structured exploration and skill discovery. TERC, for example, helps select the most informative state variables.' },
+                { id: 'bayesian-rl', title: 'Bayesian RL', icon: '🤔', description: 'Explicitly models uncertainty over unknown quantities (e.g., value functions). This allows for principled exploration-exploitation and the integration of prior domain knowledge.' },
+                { id: 'model-based', title: 'Model-Based RL', icon: '🌍', description: 'Involves learning a model of the environment’s dynamics ("world model"). This can improve sample efficiency and generalization by allowing the agent to "plan" internally.' },
+            ]
+        };
+
+        async function askGemini(topicTitle, responseContainerId, loadingElementId) {
+            const responseElement = document.getElementById(responseContainerId);
+            const loadingElement = document.getElementById(loadingElementId);
+
+            if (!responseElement || !loadingElement) {
+                console.error('Response container or loading element not found.');
+                return;
+            }
+
+            responseElement.classList.add('hidden'); // Hide previous response
+            loadingElement.classList.remove('hidden'); // Show loading spinner
+            responseElement.innerHTML = ''; // Clear previous content
+
+            const prompt = `Explain the concept of "${topicTitle}" in Reinforcement Learning, as if you are a research assistant, and provide a practical implication or an example for a graduate student. Keep the explanation concise, around 100-150 words.`;
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will automatically provide the API key here.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    responseElement.innerHTML = text;
+                    responseElement.classList.remove('hidden');
+                } else {
+                    responseElement.innerHTML = '<p class="text-red-600">Failed to get response from Gemini. Please try again.</p>';
+                    responseElement.classList.remove('hidden');
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                responseElement.innerHTML = '<p class="text-red-600">Error connecting to Gemini API. Please check your network.</p>';
+                responseElement.classList.remove('hidden');
+                console.error("Error during Gemini API call:", error);
+            } finally {
+                loadingElement.classList.add('hidden'); // Hide loading spinner
+            }
+        }
+
+
+        function createCard(item, type) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden';
+
+            const button = document.createElement('button');
+            button.className = 'w-full p-6 text-left flex items-center space-x-4 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 rounded-xl';
+            button.setAttribute('data-target', `${type}-${item.id}`);
+
+            const icon = document.createElement('div');
+            icon.className = 'flex-shrink-0 h-12 w-12 rounded-lg flex items-center justify-center bg-sky-100 text-2xl';
+            icon.textContent = item.icon;
+
+            const textContainer = document.createElement('div');
+            const title = document.createElement('h3');
+            title.className = 'text-lg font-semibold text-slate-900';
+            title.textContent = item.title;
+
+            const shortDesc = document.createElement('p');
+            if (type === 'challenges'){
+                shortDesc.className = 'text-sm text-slate-500 mt-1';
+                shortDesc.textContent = 'Click to learn more';
+            }
+
+            textContainer.appendChild(title);
+            if (type === 'challenges') textContainer.appendChild(shortDesc);
+
+            button.appendChild(icon);
+            button.appendChild(textContainer);
+
+            const detail = document.createElement('div');
+            detail.id = `${type}-${item.id}`;
+            detail.className = 'detail-card px-6 pb-6 text-slate-600 text-sm';
+            detail.innerHTML = `<p>${item.description}</p>
+            <div class="mt-4 pt-4 border-t border-slate-200">
+                <button class="ask-gemini-btn px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 flex items-center justify-center text-sm"
+                        data-topic="${item.title}"
+                        data-response-id="${type}-${item.id}-gemini-response"
+                        data-loading-id="${type}-${item.id}-gemini-loading">
+                    ✨ Ask Gemini ✨
+                </button>
+                <div id="${type}-${item.id}-gemini-loading" class="gemini-loading hidden flex items-center justify-center mt-3 text-sky-600">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-sky-600"></div>
+                    <span class="ml-2 text-sm">Generating insight...</span>
+                </div>
+                <div id="${type}-${item.id}-gemini-response" class="gemini-response mt-3 p-3 bg-sky-50 border border-sky-200 rounded-lg hidden text-slate-700 text-xs"></div>
+            </div>`;
+
+            card.appendChild(button);
+            card.appendChild(detail);
+
+            return card;
+        }
+
+        function createApproachCard(item) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden';
+
+            const button = document.createElement('button');
+            button.className = 'w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 rounded-xl';
+            button.setAttribute('data-target', `approaches-${item.id}`);
+
+            const header = document.createElement('div');
+            header.className = 'flex items-center space-x-4';
+            const icon = document.createElement('div');
+            icon.className = 'flex-shrink-0 text-3xl';
+            icon.textContent = item.icon;
+            const title = document.createElement('h3');
+            title.className = 'text-lg font-semibold text-slate-900';
+            title.textContent = item.title;
+            header.appendChild(icon);
+            header.appendChild(title);
+
+            const detail = document.createElement('div');
+            detail.id = `approaches-${item.id}`;
+            detail.className = 'detail-card mt-4 text-slate-600';
+            detail.innerHTML = `<p>${item.description}</p>
+            <div class="mt-4 pt-4 border-t border-slate-200">
+                <button class="ask-gemini-btn px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 flex items-center justify-center text-sm"
+                        data-topic="${item.title}"
+                        data-response-id="approaches-${item.id}-gemini-response"
+                        data-loading-id="approaches-${item.id}-gemini-loading">
+                    ✨ Ask Gemini ✨
+                </button>
+                <div id="approaches-${item.id}-gemini-loading" class="gemini-loading hidden flex items-center justify-center mt-3 text-sky-600">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-sky-600"></div>
+                    <span class="ml-2 text-sm">Generating insight...</span>
+                </div>
+                <div id="approaches-${item.id}-gemini-response" class="gemini-response mt-3 p-3 bg-sky-50 border border-sky-200 rounded-lg hidden text-slate-700 text-xs"></div>
+            </div>`;
+
+            button.appendChild(header);
+            card.appendChild(button);
+            card.appendChild(detail);
+
+            return card;
+        }
+
+        const challengesGrid = document.getElementById('challenges-grid');
+        contentData.challenges.forEach(item => {
+            challengesGrid.appendChild(createCard(item, 'challenges'));
+        });
+
+        const approachesGrid = document.getElementById('approaches-grid');
+        contentData.approaches.forEach(item => {
+            approachesGrid.appendChild(createApproachCard(item));
+        });
+
+        // Event delegation for opening detail cards
+        [challengesGrid, approachesGrid].forEach(grid => {
+            grid.addEventListener('click', e => {
+                const button = e.target.closest('button[data-target]'); // Select buttons that toggle detail cards
+                if (button) {
+                    const targetId = button.dataset.target;
+                    const detailElement = document.getElementById(targetId);
+                    if (detailElement) {
+                        detailElement.classList.toggle('open');
+                    }
+                }
+            });
+        });
+
+        // Event delegation for "Ask Gemini" buttons
+        document.addEventListener('click', e => {
+            const geminiButton = e.target.closest('.ask-gemini-btn');
+            if (geminiButton) {
+                const topic = geminiButton.dataset.topic;
+                const responseId = geminiButton.dataset.responseId;
+                const loadingId = geminiButton.dataset.loadingId;
+                askGemini(topic, responseId, loadingId);
+            }
+        });
+
+        const foundationsFlowchart = document.getElementById('foundations-flowchart');
+        const foundationDetailsContainer = document.getElementById('foundation-details-container');
+        contentData.foundations.forEach((item, index) => {
+            const node = document.createElement('div');
+            node.className = 'foundation-node flex-1 text-center p-6 bg-white rounded-xl shadow-md border border-slate-200 transition-all duration-300 cursor-pointer hover:shadow-lg hover:border-sky-400';
+            node.setAttribute('data-target', `foundation-content-${item.id}`);
+            node.innerHTML = `
+            <div class="text-3xl mb-2">${item.icon}</div>
+            <h3 class="font-bold text-slate-900">${item.title}</h3>
+        `;
+            foundationsFlowchart.appendChild(node);
+
+            if (index < contentData.foundations.length - 1) {
+                const connector = document.createElement('div');
+                connector.className = 'text-slate-300 text-2xl font-light hidden md:block mx-4';
+                connector.innerHTML = '&rarr;';
+                foundationsFlowchart.appendChild(connector);
+            }
+
+            const detailNode = document.createElement('div');
+            detailNode.id = `foundation-content-${item.id}`;
+            detailNode.className = 'foundation-node-content bg-sky-50 border border-sky-200 rounded-lg p-6';
+            let contentHTML = `<h4 class="font-bold text-lg text-sky-800 mb-4">${item.title}: Key Topics</h4><ul class="space-y-3 list-disc list-inside text-sky-700">`;
+            item.content.forEach(sub => {
+                contentHTML += `<li><strong>${sub.name}:</strong> ${sub.desc}</li>`;
+            });
+            contentHTML += '</ul>';
+            detailNode.innerHTML = contentHTML;
+            foundationDetailsContainer.appendChild(detailNode);
+        });
+
+        let openFoundationNode = null;
+        foundationsFlowchart.addEventListener('click', (e) => {
+            const node = e.target.closest('.foundation-node');
+            if (!node) return;
+
+            const targetId = node.dataset.target;
+            const targetContent = document.getElementById(targetId);
+
+            document.querySelectorAll('.foundation-node-content.open').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('.foundation-node.bg-sky-100').forEach(el => el.classList.remove('bg-sky-100'));
+
+            if(openFoundationNode !== targetContent){
+                targetContent.classList.add('open');
+                node.classList.add('bg-sky-100');
+                openFoundationNode = targetContent;
+            } else {
+                openFoundationNode = null;
+            }
+        });
+
+        const ctx = document.getElementById('frameworksChart').getContext('2d');
+        const frameworksChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['OpenAI Gym / Gymnasium', "Meta's ReAgent", "DeepMind's OpenSpiel", 'Procgen Benchmark'],
+                datasets: [{
+                    label: 'Environment Diversity & Benchmarking',
+                    data: [9, 3, 7, 10],
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                    borderColor: 'rgba(56, 189, 248, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Real-World Deployment & Offline RL',
+                    data: [2, 9, 2, 1],
+                    backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                    borderColor: 'rgba(34, 197, 94, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Game Theory & Multi-Agent Research',
+                    data: [4, 3, 10, 5],
+                    backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { display: false },
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { color: '#e2e8f0' },
+                        ticks: {
+                            color: '#475569',
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#475569',
+                            padding: 20,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        titleFont: { size: 14 },
+                        bodyFont: { size: 12 },
+                        padding: 10,
+                        cornerRadius: 4,
+                        displayColors: true,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Conceptual Focus of RL Frameworks',
+                        color: '#1e293b',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RL Generalization Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Slate -->
+    <!-- Application Structure Plan: The SPA is structured as a progressive, interactive learning roadmap. It features a sticky navigation to major phases (Overview, Foundations, Core RL, Generalization, Practice, Schedule). Each phase contains expandable cards for topics, which further reveal subtopics with checklists, status trackers, and resource links. Quizzes are embedded for knowledge consolidation. The "Ask Gemini" feature provides on-demand explanations for key concepts. A dedicated 15-week schedule section offers a chronological learning path. This design supports self-paced learning, active engagement through checklists and quizzes, and on-demand deeper understanding, making complex academic content highly consumable and actionable for an aspiring researcher. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Core RL Challenges -> Goal: Inform -> Viz/Method: Interactive HTML/CSS Cards -> Interaction: Click-to-reveal details, then "Ask Gemini" for deeper insight -> Justification: Breaks down complex problems, with AI support for further explanation.
+        - Report Info: Foundational Knowledge (Math, RL, DL) -> Goal: Organize/Guide -> Viz/Method: Expandable HTML/CSS Topic Cards with subtopic checklists and resource links -> Interaction: Click to expand, mark progress, follow links -> Justification: Provides a structured curriculum that can be tracked.
+        - Report Info: Advanced Generalization Approaches -> Goal: Compare/Inform -> Viz/Method: Grid of expandable HTML/CSS cards with Gemini integration -> Interaction: Click to expand, get AI-generated explanations -> Justification: Allows quick scanning with deep-dive options.
+        - Report Info: RL Frameworks -> Goal: Compare -> Viz/Method: Bar Chart (Chart.js) -> Interaction: Hover for tooltips -> Justification: Quick conceptual visual comparison.
+        - Report Info: Weekly Schedule -> Goal: Guide/Organize -> Viz/Method: Interactive HTML/CSS weekly cards -> Interaction: Expand to see goals and activities -> Justification: Offers a clear temporal plan.
+        - Quizzes: Goal: Assess understanding -> Viz/Method: HTML/CSS form with JS validation -> Interaction: Select answer, get feedback -> Justification: Self-assessment for learning.
+        - Library/Method: All visuals use HTML/CSS (Tailwind) and Chart.js (Canvas), adhering to the no-SVG/Mermaid constraint. The chart is placed in a properly styled, responsive container. Gemini API is integrated for on-demand explanations. Local storage persists user progress on checklists/status. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
+        }
+        .concept-node, .roadmap-topic-card {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .concept-node:hover, .roadmap-topic-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .detail-card, .expandable-content {
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .detail-card.open, .expandable-content.open {
+            max-height: 1000px; /* Sufficiently large to reveal all content */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .quiz-answer {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-answer:hover {
+            background-color: #e0f2fe; /* sky-100 */
+        }
+        .quiz-answer.correct {
+            background-color: #dcfce7; /* green-100 */
+            border-color: #22c55e; /* green-500 */
+        }
+        .quiz-answer.incorrect {
+            background-color: #fee2e2; /* red-100 */
+            border-color: #ef4444; /* red-500 */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <a href="#home" class="text-xl font-bold text-slate-900">RL Gen Roadmap</a>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="#foundations" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Foundations</a>
+                    <a href="#core-rl" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Core RL</a>
+                    <a href="#generalization-advanced" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Generalization</a>
+                    <a href="#practical-research" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Practice</a>
+                    <a href="#schedule" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Schedule</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+
+    <section id="home" class="text-center mb-24">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight">
+            Advancing Generalization in Reinforcement Learning
+        </h1>
+        <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-600">
+            An interactive roadmap for aspiring researchers. Explore the core challenges, foundational knowledge, advanced techniques, and practical skills needed to contribute to this cutting-edge field.
+        </p>
+        <div class="mt-12">
+            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Jump to a section</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+                <a href="#foundations" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🧱</div>
+                    <h3 class="font-bold text-slate-900">Foundations</h3>
+                </a>
+                <a href="#core-rl" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🤖</div>
+                    <h3 class="font-bold text-slate-900">Core RL</h3>
+                </a>
+                <a href="#generalization-advanced" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🛠️</div>
+                    <h3 class="font-bold text-slate-900">Generalization</h3>
+                </a>
+                <a href="#practical-research" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🔬</div>
+                    <h3 class="font-bold text-slate-900">In Practice</h3>
+                </a>
+                <a href="#schedule" class="concept-node block p-6 bg-white rounded-xl shadow-md border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">📅</div>
+                    <h3 class="font-bold text-slate-900">15-Week Schedule</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="foundations" class="mb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Phase 1: Foundational Knowledge</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">A strong theoretical base in mathematics and deep learning is non-negotiable. Explore the essential disciplines and track your progress.</p>
+        </div>
+        <div id="foundations-container" class="space-y-8"></div>
+        <div class="quiz-section mt-16 max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Quiz: Foundations</h3>
+            <div id="quiz-foundations"></div>
+            <button class="submit-quiz-btn mt-6 px-5 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 text-sm">Submit Answers</button>
+            <div id="quiz-foundations-feedback" class="mt-4 font-semibold"></div>
+        </div>
+    </section>
+
+    <section id="core-rl" class="mb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Phase 2: Core Reinforcement Learning</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">Master the fundamental concepts and algorithms that drive reinforcement learning agents. Track your progress through these essential topics.</p>
+        </div>
+        <div id="core-rl-container" class="space-y-8"></div>
+        <div class="quiz-section mt-16 max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Quiz: Core RL</h3>
+            <div id="quiz-core-rl"></div>
+            <button class="submit-quiz-btn mt-6 px-5 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 text-sm">Submit Answers</button>
+            <div id="quiz-core-rl-feedback" class="mt-4 font-semibold"></div>
+        </div>
+    </section>
+
+    <section id="generalization-advanced" class="mb-24 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Phase 3: Generalization & Advanced Topics</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">Dive into the cutting-edge research areas and sophisticated techniques used to improve RL agent generalization. Use Gemini to get deeper insights.</p>
+        </div>
+        <div id="generalization-advanced-container" class="space-y-8"></div>
+        <div class="quiz-section mt-16 max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Quiz: Generalization</h3>
+            <div id="quiz-generalization"></div>
+            <button class="submit-quiz-btn mt-6 px-5 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 text-sm">Submit Answers</button>
+            <div id="quiz-generalization-feedback" class="mt-4 font-semibold"></div>
+        </div>
+    </section>
+
+    <section id="practical-research" class="mb-16 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Phase 4: Practical Research & Projects</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">Translate theory into practice. This section covers experimental design, common pitfalls, key tools, and project ideas to build your research portfolio.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div id="experimental-design">
+                <h3 class="text-2xl font-bold mb-4 text-slate-900">Principles of Experimental Design</h3>
+                <p class="text-slate-600 mb-6">Robust conclusions depend on sound experimental practices. Here are some key principles to uphold in your research.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                        <span class="text-2xl mr-4">🔄</span>
+                        <div>
+                            <h4 class="font-semibold">Performance & Stability</h4>
+                            <p class="text-slate-500 text-sm">Run experiments with multiple random seeds to characterize reliability and report performance distributions, not just averages.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                        <span class="text-2xl mr-4">⚙️</span>
+                        <div>
+                            <h4 class="font-semibold">Hyperparameter Management</h4>
+                            <p class="text-slate-500 text-sm">Conduct careful sensitivity analysis and avoid maximization bias. Ensure fair comparisons with comparable tuning effort for all algorithms.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                        <span class="text-2xl mr-4">🎯</span>
+                        <div>
+                            <h4 class="font-semibold">Environment Selection</h4>
+                            <p class="text-slate-500 text-sm">Start with simple diagnostic environments to isolate issues, then move to established benchmarks like Procgen for validation.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="common-pitfalls">
+                <h3 class="text-2xl font-bold mb-4 text-slate-900">Common Pitfalls to Avoid</h3>
+                <p class="text-slate-600 mb-6">Awareness of common errors is vital for research integrity. Watch out for these issues in your own work and when reviewing others'.</p>
+                <div class="space-y-3 text-slate-600">
+                    <p class="flex items-center"><span class="text-red-500 font-bold text-xl mr-3">✗</span> Averaging over too few runs.</p>
+                    <p class="flex items-center"><span class="text-red-500 font-bold text-xl mr-3">✗</span> Reusing hyperparameters without validation.</p>
+                    <p class="flex items-center"><span class="text-red-500 font-bold text-xl mr-3">✗</span> Failing to re-tune after ablations.</p>
+                    <p class="flex items-center"><span class="text-green-500 font-bold text-xl mr-3">✓</span> Control random seeds for agent & environment separately.</p>
+                    <p class="flex items-center"><span class="text-green-500 font-bold text-xl mr-3">✓</span> Include calibration baselines (e.g., random policy).</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-16">
+            <h3 class="text-2xl font-bold mb-4 text-center text-slate-900">A Look at RL Frameworks</h3>
+            <p class="text-slate-600 mb-8 max-w-2xl mx-auto text-center">Different toolkits serve different research goals. This chart provides a conceptual comparison of some popular frameworks based on their primary strengths.</p>
+            <div class="chart-container">
+                <canvas id="frameworksChart"></canvas>
+            </div>
+        </div>
+        <div id="projects-portfolio" class="mt-16 p-8 bg-white rounded-xl shadow-sm border border-slate-200">
+            <h3 class="text-2xl font-bold mb-4 text-slate-900">Projects & Portfolio Building</h3>
+            <p class="text-slate-600 mb-6">Practical application of knowledge is key to becoming a researcher. Here are ideas to build a strong portfolio.</p>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <span class="text-2xl mr-4">💻</span>
+                    <div>
+                        <h4 class="font-semibold">Implement Algorithms from Scratch</h4>
+                        <p class="text-slate-500 text-sm">Implement core RL (e.g., Q-Learning, Policy Gradient) and DL algorithms (e.g., simple feedforward networks, CNNs) to solidify understanding.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-2xl mr-4">📊</span>
+                    <div>
+                        <h4 class="font-semibold">Embedding Visualizations</h4>
+                        <p class="text-slate-500 text-sm">Visualize learned embeddings (e.g., policy similarity embeddings using t-SNE or UMAP) to gain insights into generalization behavior.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-2xl mr-4">📄</span>
+                    <div>
+                        <h4 class="font-semibold">Recreate Key Research Papers</h4>
+                        <p class="text-slate-500 text-sm">Attempt to reproduce results from papers like "Improving Generalization in Reinforcement Learning using Policy Similarity Embeddings" or "Latent Dynamics Mixture for Generalization in Meta-RL."</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-2xl mr-4">🏆</span>
+                    <div>
+                        <h4 class="font-semibold">Participate in RL Challenges/Competitions</h4>
+                        <p class="text-slate-500 text-sm">Engage in challenges on platforms like Procgen, MiniGrid, or other RL benchmarks to test your algorithms in diverse settings.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="schedule" class="mb-16 scroll-mt-24">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">15-Week Learning Schedule</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-lg text-slate-600">This structured schedule is designed to guide your learning over 15 weeks, with weekly focus areas, goals, and suggested activities.</p>
+        </div>
+        <div id="weekly-schedule-container" class="space-y-6"></div>
+    </section>
+
+</main>
+
+<footer class="bg-slate-800 text-slate-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <p class="font-semibold">Source Material & Additional Resources</p>
+        <div class="mt-2 text-sm flex flex-col md:flex-row justify-center items-center gap-x-6 gap-y-2">
+            <a href="https://research.google/blog/improving-generalization-in-reinforcement-learning-using-policy-similarity-embeddings/" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">Google Research: Policy Similarity Embeddings</a>
+            <a href="https://arxiv.org/abs/2306.05483" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">arXiv: Latent Dynamics Mixture for Generalization in Meta-RL</a>
+            <a href="https://www.youtube.com/playlist?list=PLgNJO2hHgiLlJk75Wv1Xj_pY2lH-1s-q9" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">David Silver's RL Course</a>
+            <a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400">Sutton & Barto RL Book</a>
+        </div>
+        <p class="mt-6 text-xs text-slate-500">This interactive application was generated based on the provided research report to facilitate learning and exploration of generalization in RL.</p>
+    </div>
+</footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const appData = {
+            roadmap: {
+                foundations: [
+                    {
+                        id: 'math-foundations',
+                        title: 'Mathematics Foundations',
+                        icon: '🔢',
+                        description: 'A solid mathematical background is indispensable for comprehending, analyzing, and advancing sophisticated DRL algorithms. This section covers linear algebra, calculus, probability, statistics, and optimization.',
+                        subtopics: [
+                            { name: 'Set Theory & Logic', desc: 'Define sets, functions, logical operations (AND, OR, NOT).', links: [{ text: 'Khan Academy: Sets & Venn Diagrams', url: 'https://www.khanacademy.org/math/algebra-home/alg-sets-and-probability' }] },
+                            { name: 'Probability & Statistics', desc: 'Random variables (discrete, continuous), common probability distributions (Bernoulli, Binomial, Gaussian, Poisson), expectation, variance, covariance, Bayes\' theorem, central limit theorem. Essential for modeling uncertainty in RL environments.', links: [{ text: 'Khan Academy: Statistics', url: 'https://www.khanacademy.org/math/statistics-probability' }, { text: 'Think Stats PDF', url: 'https://greenteapress.com/wp/think-stats-2e/' }, { text: 'UCSD Ext. Studies: Prob & Stats for DL', url: 'https://extension.ucsd.edu/courses-and-programs/probability-and-statistics-for-deep-learning' }] },
+                            { name: 'Linear Algebra', desc: 'Scalars, vectors, matrices, tensors, matrix operations (addition, multiplication, transpose, inverse), dot product, norms, eigenvalues, eigenvectors, Singular Value Decomposition (SVD). Fundamental for data representation and neural network operations.', links: [{ text: '3Blue1Brown: Essence of Linear Algebra', url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi' }, { text: 'Khan Academy: Linear Algebra', url: 'https://www.khanacademy.org/math/linear-algebra' }, { text: 'UCSD Ext. Studies: Linear Algebra for ML', url: 'https://extension.ucsd.edu/courses-and-programs/linear-algebra-for-machine-learning' }] },
+                            { name: 'Calculus: Derivatives & Chain Rule', desc: 'Derivatives, partial derivatives, chain rule, gradients, Hessian matrix. Essential for understanding optimization via gradients and backpropagation.', links: [{ text: 'Khan Academy: Calculus I', url: 'https://www.khanacademy.org/math/calculus-1' }, { text: 'Paul\'s Online Math Notes: Calculus III', url: 'https://tutorial.math.lamar.edu/Classes/CalcIII/CalcIII.aspx' }, { text: 'The Matrix Calculus You Need For Deep Learning', url: 'https://arxiv.org/pdf/1802.01528.pdf' }] },
+                            { name: 'Optimization Basics', desc: 'Gradient descent (batch, stochastic, mini-batch), learning rate, convergence, convex vs non-convex optimization, local minima, saddle points. Critical for training deep neural networks efficiently.', links: [{ text: 'Coursera ML: Optimization', url: 'https://www.coursera.org/learn/machine-learning/lecture/rkHh4/gradient-descent' }, { text: 'Towards Data Science: Optimization', url: 'https://towardsdatascience.com/a-comprehensive-guide-to-optimization-algorithms-for-deep-learning-7f99992c10b' }] },
+                        ]
+                    },
+                    {
+                        id: 'dl-foundations',
+                        title: 'Deep Learning Foundations',
+                        icon: '🧠',
+                        description: 'Deep Learning enables RL systems to process high-dimensional inputs and learn complex representations. This section covers neural network fundamentals, architectures, and training techniques.',
+                        subtopics: [
+                            { name: 'Neural Network Basics', desc: 'Perceptron, activation functions (Sigmoid, ReLU, Leaky ReLU, Tanh, Softmax), layers (input, hidden, output), weights, biases, forward propagation, loss functions (Mean Squared Error, Cross-Entropy).', links: [{ text: 'DeepLearning.AI Courses', url: 'https://www.deeplearning.ai/courses/' }, { text: 'FastAI Courses', url: 'https://course.fast.ai/' }, { text: 'Neural Networks From Scratch Book', url: 'https://nnfs.io/' }] },
+                            { name: 'Backpropagation & Gradient Descent', desc: 'The backpropagation algorithm, its application of the chain rule, and the role of gradients in updating neural network weights.', links: [{ text: 'DeepLearning.AI: Backpropagation', url: 'https://www.deeplearning.ai/courses/' }] },
+                            { name: 'Activations & Architectures', desc: 'Understanding common DNN architectures: Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs, LSTMs, GRUs), and Transformer-based architectures with attention mechanisms.', links: [{ text: 'FastAI: Architectures', url: 'https://course.fast.ai/' }] },
+                            { name: 'Training Techniques (Regularization, Batch Norm)', desc: 'Strategies to prevent overfitting and improve robustness: L1/L2 regularization, Dropout, Batch Normalization, early stopping.', links: [{ text: 'DeepLearning.AI: Training', url: 'https://www.deeplearning.ai/courses/' }] },
+                        ]
+                    }
+                ],
+                coreRl: [
+                    {
+                        id: 'core-rl-basics',
+                        title: 'Core Reinforcement Learning Concepts',
+                        icon: '🤖',
+                        description: 'Grasp the fundamental framework and theoretical underpinnings of Reinforcement Learning.',
+                        subtopics: [
+                            { name: 'MDPs, Policies, Value Functions', desc: 'Markov Decision Processes (S, A, P, R, γ), deterministic/stochastic policies, state-value function V(s), action-value function Q(s,a).', links: [{ text: 'Sutton & Barto RL Book (Ch. 1-3)', url: 'http://incompleteideas.net/book/the-book-2nd.html' }, { text: 'David Silver Lectures', url: 'https://www.youtube.com/playlist?list=PLqM7Wg1Glb6l7Rj8q0J2fV-n3J32Z-Qv0' }] },
+                            { name: 'Bellman Equations & Dynamic Programming', desc: 'Bellman Expectation and Optimality Equations, Value Iteration, Policy Iteration.', links: [{ text: 'Sutton & Barto RL Book (Ch. 3-4)', url: 'http://incompleteideas.net/book/the-book-2nd.html' }, { text: 'David Silver Lectures', url: 'https://www.youtube.com/playlist?list=PLqM7Wg1Glb6l7Rj8q0J2fV-n3J32Z-Qv0' }] },
+                            { name: 'Monte Carlo & TD Learning', desc: 'Monte Carlo methods (first-visit, every-visit), Temporal-Difference (TD) learning (TD(0), SARSA, Q-Learning), and the concept of bootstrapping.', links: [{ text: 'Sutton & Barto RL Book (Ch. 5-6)', url: 'http://incompleteideas.net/book/the-book-2nd.html' }, { text: 'David Silver Lectures', url: 'https://www.youtube.com/playlist?list=PLqM7Wg1Glb6l7Rj8q0J2fV-n3J32Z-Qv0' }] },
+                            { name: 'Function Approximation', desc: 'Understanding why function approximation (using neural networks) is necessary for large state/action spaces.', links: [{ text: 'Sutton & Barto RL Book (Ch. 9)', url: 'http://incompleteideas.net/book/the-book-2nd.html' }] },
+                            { name: 'Deep Q-Networks (DQN)', desc: 'The seminal algorithm combining Q-learning with deep neural networks, including improvements like Double DQN and Dueling DQN.', links: [{ text: 'Google DeepMind: Playing Atari with Deep Reinforcement Learning', url: 'https://arxiv.org/abs/1312.5602' }] },
+                            { name: 'Policy Gradient Methods (REINFORCE)', desc: 'Algorithms that directly learn a parameterized policy, such as REINFORCE.', links: [{ text: 'Sutton & Barto RL Book (Ch. 13)', url: 'http://incompleteideas.net/book/the-book-2nd.html' }] },
+                            { name: 'Actor-Critic Methods (A2C/A3C, PPO, SAC)', desc: 'Hybrid methods combining value-based and policy-based approaches, including A2C/A3C, Proximal Policy Optimization (PPO), and Soft Actor-Critic (SAC).', links: [{ text: 'OpenAI: PPO', url: 'https://openai.com/research/ppo' }] },
+                        ]
+                    }
+                ],
+                generalizationAdvanced: [
+                    { id: 'overfitting', title: 'Overfitting to Training Data', icon: '🎯', description: "A primary limitation where DRL policies perform well on training environments but fail significantly in novel ones. This is especially pronounced in Contextual MDPs, where agents struggle to generalize to unseen variations from the same family." },
+                    { id: 'overestimation', title: 'Value Overestimation', icon: '📈', description: "A tendency of many value-based methods to overestimate state-action (Q) values. This bias can stem from statistical issues or function approximation errors, leading the agent to rely on spurious features and hindering true generalization." },
+                    { id: 'inefficiency', title: 'Sample Inefficiency', icon: '💧', description: "Deep RL models often require vast amounts of interaction data to learn effective policies. This is a major barrier to generalization, as collecting diverse data for all possible unseen scenarios is often impractical or computationally prohibitive." },
+                    { id: 'contrastive-embeddings', title: 'Contrastive Embeddings', icon: '🔗', description: 'Learning efficient and robust state representations by contrasting positive and negative examples, leading to better generalization.', links: [{ text: 'Paper: Contrastive Predictive Coding', url: 'https://arxiv.org/abs/1807.03748' }] },
+                    { id: 'policy-similarity', title: 'Policy Similarity Metrics (PSE)', icon: '🤝', description: 'Quantifying and leveraging the similarity between learned policies across different environments to improve generalization. This includes Policy Similarity Embeddings (PSE).', links: [{ text: 'Google Research Blog: Policy Similarity Embeddings', url: 'https://research.google/blog/improving-generalization-in-reinforcement-learning-using-policy-similarity-embeddings/' }] },
+                    { id: 'distributional-rl', title: 'Distributional RL & Ensembles', icon: '📦', description: 'Learning a distribution over returns rather than just the expectation, which can better capture uncertainty and lead to more robust policies. Ensembles of Q-value distributions (e.g., EDE) are a key technique.', links: [{ text: 'Paper: A Distributional Perspective on RL', url: 'https://arxiv.org/abs/1707.06887' }] },
+                    { id: 'uncertainty-exploration', title: 'Uncertainty and Exploration (EDE)', icon: '🧭', description: 'Driving exploration using epistemic uncertainty to acquire knowledge that helps in unseen environments. Exploration via Distributional Ensemble (EDE) is a prime example.', links: [{ text: 'EDE Paper', url: 'https://arxiv.org/abs/2103.05837' }] },
+                    { id: 'evaluation-benchmarks', title: 'Evaluation Benchmarks (Procgen, Crafter)', icon: '🧪', description: 'Using diverse, procedurally generated environments like Procgen and Crafter to rigorously test and evaluate the generalization capabilities of RL agents.', links: [{ text: 'Procgen Benchmark', url: 'https://github.com/openai/procgen' }, { text: 'Crafter Environment', url: 'https://github.com/danijar/crafter' }] },
+                    { id: 'offline-rl', title: 'Offline RL & Policy-Invariant Learning', icon: '💾', description: 'Learning effective policies from static, previously collected datasets without further environment interaction. Key for real-world deployment and addressing sample inefficiency.', links: [{ text: 'Paper: Offline Reinforcement Learning', url: 'https://arxiv.org/abs/2007.03158' }] },
+                    { id: 'meta-rl', title: 'Meta-Reinforcement Learning (LDM)', icon: '📚', description: 'Aims to "learn to learn" by training on a distribution of tasks, enabling rapid adaptation to new, unseen tasks with minimal data. Latent Dynamics Mixture (LDM) is a novel approach.', links: [{ text: 'LDM Paper', url: 'https://arxiv.org/abs/2306.05483' }] },
+                    { id: 'transfer-learning', title: 'Transfer Learning', icon: '↪️', description: 'Leveraging knowledge from external sources (e.g., expert demonstrations, pre-trained policies) to accelerate learning in a new target domain, including reward shaping, policy distillation, and inter-task mapping.', links: [{ text: 'Survey: Transfer Learning in RL', url: 'https://arxiv.org/abs/1911.09635' }] },
+                    { id: 'information-theoretic', title: 'Information-Theoretic Approaches', icon: '📊', description: 'Using concepts like entropy, mutual information, and KL divergence for structured exploration, skill discovery, and efficient feature selection (e.g., TERC).', links: [{ text: 'Paper: TERC', url: 'https://arxiv.org/abs/1902.04631' }] },
+                    { id: 'bayesian-rl', title: 'Bayesian RL', icon: '🤔', description: 'Explicitly modeling uncertainty over unknown quantities (e.g., value functions) to enable principled exploration-exploitation, improved data-efficiency, and integration of prior domain knowledge.', links: [{ text: 'Survey: Bayesian Reinforcement Learning', url: 'https://arxiv.org/abs/1807.09403' }] },
+                    { id: 'model-based', title: 'Model-Based RL for Generalization', icon: '🌍', description: 'Learning an internal model of the environment’s dynamics ("world model") to improve sample efficiency and generalization through internal planning.', links: [{ text: 'DeepMind: World Models', url: 'https://arxiv.org/abs/1803.10122' }] },
+                ],
+            },
+            schedule: [
+                { week: 1, focus: 'Set Theory & Logic', goals: 'Understand sets/functions; practice with exercises.' },
+                { week: 2, focus: 'Probability & Statistics I', goals: 'Learn distributions, expectation, variance; complete Khan Academy.' },
+                { week: 3, focus: 'Probability & Statistics II', goals: 'Deeper dive into Bayes\' theorem and stochastic processes.' },
+                { week: 4, focus: 'Linear Algebra I', goals: 'Finish 3Blue1Brown & Khan courses on vectors, matrices.' },
+                { week: 5, focus: 'Linear Algebra II & Calculus', goals: 'Eigenvalues, SVD, derivatives, chain rule; solve practice problems.' },
+                { week: 6, focus: 'Optimization Basics', goals: 'Cover gradient descent fundamentals; implement simple optimizer.' },
+                { week: 7, focus: 'Neural Network Basics', goals: 'Build perceptron; learn forward pass & loss types.' },
+                { week: 8, focus: 'Backpropagation & Gradient Descent', goals: 'Implement backpropagation; train small networks from scratch.' },
+                { week: 9, focus: 'Activation Functions & Architectures', goals: 'Explore CNN basics; try simple image models; introduce RNNs/Transformers.' },
+                { week: 10, focus: 'Training Deep Nets', goals: 'Apply dropout, regularization, batch norm; train a network end-to-end; understand overfitting.' },
+                { week: 11, focus: 'Core RL – MDPs, Value Functions, Bellman Equations', goals: 'Study Sutton Ch. 1–3; replicate small DP examples.' },
+                { week: 12, focus: 'TD, Monte Carlo, Q‑Learning, SARSA', goals: 'Implement tabular Q-Learning and SARSA agents; understand bootstrapping.' },
+                { week: 13, focus: 'Deep RL – DQN, Policy Gradients, Actor-Critic', goals: 'Try OpenAI Gym examples with DQN/PPO; understand core ideas of A2C/A3C/SAC.' },
+                { week: 14, focus: 'Representation & Exploration for Generalization', goals: 'Learn contrastive embeddings, policy similarity; run simple Procgen experiments; explore EDE and uncertainty-driven exploration.' },
+                { week: 15, focus: 'Projects & Research Portfolio', goals: 'Reproduce PSE or LDM; visualize results; prepare research pitch/summary.' },
+            ],
+            quizzes: {
+                foundations: [
+                    {
+                        question: 'Which of the following is NOT a fundamental concept in Probability & Statistics crucial for RL?',
+                        options: ['Random Variables', 'Expectation', 'Bayes\' Theorem', 'Prime Factorization'],
+                        correctAnswer: 'Prime Factorization',
+                        explanation: 'Prime factorization is a concept from number theory, not directly used as a fundamental concept in the probabilistic modeling of RL environments.'
+                    },
+                    {
+                        question: 'The Chain Rule in Calculus is essential for which deep learning process?',
+                        options: ['Forward Propagation', 'Weight Initialization', 'Backpropagation', 'Activation Function Selection'],
+                        correctAnswer: 'Backpropagation',
+                        explanation: 'Backpropagation relies heavily on the Chain Rule to compute gradients through multiple layers of a neural network.'
+                    }
+                ],
+                coreRl: [
+                    {
+                        question: 'In an MDP, what does the Discount Factor (γ) control?',
+                        options: ['The probability of transitioning to a new state.', 'The learning rate of the agent.', 'The present value of future rewards.', 'The number of actions available.'],
+                        correctAnswer: 'The present value of future rewards.',
+                        explanation: 'The discount factor γ determines how much future rewards are valued compared to immediate rewards, balancing short-term vs. long-term gains.'
+                    },
+                    {
+                        question: 'Which RL algorithm uses bootstrapping, updating estimates based on other estimates?',
+                        options: ['Monte Carlo', 'Q-Learning', 'REINFORCE', 'Policy Iteration'],
+                        correctAnswer: 'Q-Learning',
+                        explanation: 'Q-Learning is a Temporal-Difference (TD) learning method, and TD methods are characterized by bootstrapping, using estimated values to update other estimated values.'
+                    }
+                ],
+                generalization: [
+                    {
+                        question: 'Which of these is a key challenge to generalization in Deep RL?',
+                        options: ['Value Underestimation', 'Sample Efficiency', 'Perfect Demonstrations', 'Simplified Environments'],
+                        correctAnswer: 'Sample Efficiency',
+                        explanation: 'Deep RL models typically require vast amounts of interaction data, leading to high computational demands and making sample efficiency a major barrier to generalization.'
+                    },
+                    {
+                        question: 'What is the primary goal of Meta-Reinforcement Learning (Meta-RL) regarding generalization?',
+                        options: ['To learn a single policy for all tasks.', 'To learn to adapt quickly to new, unseen tasks.', 'To remove the need for any exploration.', 'To achieve perfect transfer from a single source task.'],
+                        correctAnswer: 'To learn to adapt quickly to new, unseen tasks.',
+                        explanation: 'Meta-RL aims to "learn to learn" across a distribution of tasks, enabling rapid adaptation to new, related tasks with minimal additional data or training.'
+                    }
+                ]
+            }
+        };
+
+        // --- Progress Tracking (Local Storage) ---
+        function saveProgress(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        function loadProgress(key, defaultValue) {
+            const stored = localStorage.getItem(key);
+            return stored ? JSON.parse(stored) : defaultValue;
+        }
+
+        const checklistProgress = loadProgress('checklistProgress', {});
+        const statusProgress = loadProgress('statusProgress', {});
+
+        // --- Dynamic Content Generation ---
+        function createTopicCard(topic, sectionId) {
+            const card = document.createElement('div');
+            card.className = 'roadmap-topic-card bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden';
+
+            const headerButton = document.createElement('button');
+            headerButton.className = 'w-full p-6 text-left flex items-center space-x-4 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 rounded-xl';
+            headerButton.setAttribute('data-target', `${sectionId}-${topic.id}-content`);
+
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'flex-shrink-0 h-12 w-12 rounded-lg flex items-center justify-center bg-sky-100 text-2xl';
+            iconDiv.textContent = topic.icon;
+
+            const titleDiv = document.createElement('div');
+            const title = document.createElement('h3');
+            title.className = 'text-lg font-semibold text-slate-900';
+            title.textContent = topic.title;
+            const desc = document.createElement('p');
+            desc.className = 'text-sm text-slate-500 mt-1';
+            desc.textContent = topic.description;
+            titleDiv.appendChild(title);
+            titleDiv.appendChild(desc);
+
+            headerButton.appendChild(iconDiv);
+            headerButton.appendChild(titleDiv);
+
+            const expandableContent = document.createElement('div');
+            expandableContent.id = `${sectionId}-${topic.id}-content`;
+            expandableContent.className = 'expandable-content px-6 pb-6 text-slate-600 text-sm';
+
+            if (topic.subtopics) {
+                const subtopicList = document.createElement('ul');
+                subtopicList.className = 'space-y-4 pt-4 border-t border-slate-200 mt-4';
+                topic.subtopics.forEach(sub => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start flex-col sm:flex-row sm:items-center p-3 bg-slate-50 rounded-lg border border-slate-100';
+
+                    const checkboxId = `${sectionId}-${topic.id}-${sub.name.replace(/\s+/g, '-')}-checkbox`;
+                    const isChecked = checklistProgress[checkboxId] || false;
+
+                    const checkboxContainer = document.createElement('div');
+                    checkboxContainer.className = 'flex items-center mb-2 sm:mb-0 sm:w-1/2';
+                    checkboxContainer.innerHTML = `
+                    <input type="checkbox" id="${checkboxId}" class="form-checkbox h-4 w-4 text-sky-600 rounded" ${isChecked ? 'checked' : ''}>
+                    <label for="${checkboxId}" class="ml-2 text-base font-medium text-slate-700">${sub.name}</label>
+                `;
+                    checkboxContainer.querySelector('input').addEventListener('change', (e) => {
+                        checklistProgress[checkboxId] = e.target.checked;
+                        saveProgress('checklistProgress', checklistProgress);
+                    });
+
+                    const contentContainer = document.createElement('div');
+                    contentContainer.className = 'sm:w-1/2 sm:pl-4 mt-2 sm:mt-0 text-sm text-slate-500';
+                    contentContainer.textContent = sub.desc;
+
+                    if (sub.links && sub.links.length > 0) {
+                        const linksDiv = document.createElement('div');
+                        linksDiv.className = 'mt-2 flex flex-wrap gap-2';
+                        sub.links.forEach(link => {
+                            const a = document.createElement('a');
+                            a.href = link.url;
+                            a.target = '_blank';
+                            a.rel = 'noopener noreferrer';
+                            a.className = 'text-sky-600 hover:underline text-xs bg-sky-50 px-2 py-1 rounded';
+                            a.textContent = `🔗 ${link.text}`;
+                            linksDiv.appendChild(a);
+                        });
+                        contentContainer.appendChild(linksDiv);
+                    }
+
+                    const statusSelectId = `${sectionId}-${topic.id}-${sub.name.replace(/\s+/g, '-')}-status`;
+                    const currentStatus = statusProgress[statusSelectId] || 'To Do';
+                    const statusSelect = document.createElement('select');
+                    statusSelect.id = statusSelectId;
+                    statusSelect.className = 'ml-0 sm:ml-4 mt-2 sm:mt-0 px-2 py-1 border border-slate-300 rounded-md text-sm bg-white';
+                    ['To Do', 'In Progress', 'Done'].forEach(status => {
+                        const option = document.createElement('option');
+                        option.value = status;
+                        option.textContent = status;
+                        if (status === currentStatus) option.selected = true;
+                        statusSelect.appendChild(option);
+                    });
+                    statusSelect.addEventListener('change', (e) => {
+                        statusProgress[statusSelectId] = e.target.value;
+                        saveProgress('statusProgress', statusProgress);
+                    });
+
+                    li.appendChild(checkboxContainer);
+                    li.appendChild(contentContainer);
+                    li.appendChild(statusSelect);
+
+                    subtopicList.appendChild(li);
+                });
+                expandableContent.appendChild(subtopicList);
+            }
+
+            // Add Gemini button for relevant sections (challenges, advanced topics)
+            if (['generalization-advanced'].includes(sectionId)) {
+                const geminiSection = document.createElement('div');
+                geminiSection.className = 'mt-4 pt-4 border-t border-slate-200';
+                geminiSection.innerHTML = `
+                <button class="ask-gemini-btn px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 flex items-center justify-center text-sm"
+                        data-topic="${topic.title}"
+                        data-response-id="${sectionId}-${topic.id}-gemini-response"
+                        data-loading-id="${sectionId}-${topic.id}-gemini-loading">
+                    ✨ Ask Gemini ✨
+                </button>
+                <div id="${sectionId}-${topic.id}-gemini-loading" class="gemini-loading hidden flex items-center justify-center mt-3 text-sky-600">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-sky-600"></div>
+                    <span class="ml-2 text-sm">Generating insight...</span>
+                </div>
+                <div id="${sectionId}-${topic.id}-gemini-response" class="gemini-response mt-3 p-3 bg-sky-50 border border-sky-200 rounded-lg hidden text-slate-700 text-xs"></div>
+            `;
+                expandableContent.appendChild(geminiSection);
+            }
+
+            card.appendChild(headerButton);
+            card.appendChild(expandableContent);
+            return card;
+        }
+
+        // Populate Foundations
+        const foundationsContainer = document.getElementById('foundations-container');
+        appData.roadmap.foundations.forEach(topic => {
+            foundationsContainer.appendChild(createTopicCard(topic, 'foundations'));
+        });
+
+        // Populate Core RL
+        const coreRlContainer = document.getElementById('core-rl-container');
+        appData.roadmap.coreRl.forEach(topic => {
+            coreRlContainer.appendChild(createTopicCard(topic, 'core-rl'));
+        });
+
+        // Populate Generalization & Advanced Topics (using existing card structure for core challenges and creating new for advanced)
+        const generalizationAdvancedContainer = document.getElementById('generalization-advanced-container');
+        appData.roadmap.generalizationAdvanced.forEach(topic => {
+            generalizationAdvancedContainer.appendChild(createTopicCard(topic, 'generalization-advanced'));
+        });
+
+        // --- Expand/Collapse Logic for Roadmap Cards ---
+        document.querySelectorAll('.roadmap-topic-card button[data-target]').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.classList.toggle('open');
+                }
+            });
+        });
+
+        // --- Ask Gemini Function ---
+        async function askGemini(topicTitle, responseContainerId, loadingElementId) {
+            const responseElement = document.getElementById(responseContainerId);
+            const loadingElement = document.getElementById(loadingElementId);
+
+            if (!responseElement || !loadingElement) {
+                console.error('Response container or loading element not found.');
+                return;
+            }
+
+            responseElement.classList.add('hidden');
+            loadingElement.classList.remove('hidden');
+            responseElement.innerHTML = '';
+
+            const prompt = `Explain the concept of "${topicTitle}" in Reinforcement Learning, as if you are a research assistant, and provide a practical implication or an example for a graduate student. Keep the explanation concise, around 100-150 words.`;
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will automatically provide the API key here.
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    responseElement.innerHTML = `<p>${text}</p>`;
+                    responseElement.classList.remove('hidden');
+                } else {
+                    responseElement.innerHTML = '<p class="text-red-600">Failed to get response from Gemini. Please try again.</p>';
+                    responseElement.classList.remove('hidden');
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                responseElement.innerHTML = '<p class="text-red-600">Error connecting to Gemini API. Please check your network.</p>';
+                responseElement.classList.remove('hidden');
+                console.error("Error during Gemini API call:", error);
+            } finally {
+                loadingElement.classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('click', e => {
+            const geminiButton = e.target.closest('.ask-gemini-btn');
+            if (geminiButton) {
+                const topic = geminiButton.dataset.topic;
+                const responseId = geminiButton.dataset.responseId;
+                const loadingId = geminiButton.dataset.loadingId;
+                askGemini(topic, responseId, loadingId);
+            }
+        });
+
+        // --- Quiz Logic ---
+        function renderQuiz(quizData, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = ''; // Clear previous quiz
+
+            quizData.forEach((q, qIndex) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200';
+                questionDiv.innerHTML = `<p class="font-semibold text-slate-800 mb-3">Q${qIndex + 1}: ${q.question}</p>`;
+
+                const optionsDiv = document.createElement('div');
+                q.options.forEach((option, oIndex) => {
+                    const optionLabel = document.createElement('label');
+                    optionLabel.className = 'flex items-center p-2 rounded-md quiz-answer cursor-pointer';
+                    optionLabel.innerHTML = `
+                    <input type="radio" name="question-${containerId}-${qIndex}" value="${option}" class="form-radio h-4 w-4 text-sky-600">
+                    <span class="ml-2 text-slate-700">${option}</span>
+                `;
+                    optionsDiv.appendChild(optionLabel);
+                });
+                questionDiv.appendChild(optionsDiv);
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function checkQuiz(quizData, containerId, feedbackId) {
+            const container = document.getElementById(containerId);
+            const feedbackElement = document.getElementById(feedbackId);
+            let correctCount = 0;
+
+            quizData.forEach((q, qIndex) => {
+                const selectedOption = container.querySelector(`input[name="question-${containerId}-${qIndex}"]:checked`);
+                const allOptions = container.querySelectorAll(`input[name="question-${containerId}-${qIndex}"]`);
+
+                allOptions.forEach(optionInput => {
+                    const label = optionInput.closest('label');
+                    label.classList.remove('correct', 'incorrect');
+                    if (optionInput.value === q.correctAnswer) {
+                        label.classList.add('correct');
+                    }
+                });
+
+                if (selectedOption && selectedOption.value === q.correctAnswer) {
+                    correctCount++;
+                } else if (selectedOption) {
+                    selectedOption.closest('label').classList.add('incorrect');
+                }
+            });
+
+            feedbackElement.textContent = `You got ${correctCount} out of ${quizData.length} questions correct!`;
+            if (correctCount === quizData.length) {
+                feedbackElement.classList.add('text-green-600');
+                feedbackElement.classList.remove('text-red-600');
+            } else {
+                feedbackElement.classList.add('text-red-600');
+                feedbackElement.classList.remove('text-green-600');
+            }
+        }
+
+        renderQuiz(appData.quizzes.foundations, 'quiz-foundations');
+        renderQuiz(appData.quizzes.coreRl, 'quiz-core-rl');
+        renderQuiz(appData.quizzes.generalization, 'quiz-generalization');
+
+        document.querySelectorAll('.submit-quiz-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const quizContainer = e.target.previousElementSibling;
+                const feedbackElement = e.target.nextElementSibling;
+                const quizId = quizContainer.id;
+
+                if (quizId === 'quiz-foundations') {
+                    checkQuiz(appData.quizzes.foundations, quizId, feedbackElement.id);
+                } else if (quizId === 'quiz-core-rl') {
+                    checkQuiz(appData.quizzes.coreRl, quizId, feedbackElement.id);
+                } else if (quizId === 'quiz-generalization') {
+                    checkQuiz(appData.quizzes.generalization, quizId, feedbackElement.id);
+                }
+            });
+        });
+
+        // --- Chart.js for Frameworks ---
+        const ctx = document.getElementById('frameworksChart').getContext('2d');
+        const frameworksChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['OpenAI Gym / Gymnasium', "Meta's ReAgent", "DeepMind's OpenSpiel", 'Procgen Benchmark'],
+                datasets: [{
+                    label: 'Environment Diversity & Benchmarking',
+                    data: [9, 3, 7, 10],
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                    borderColor: 'rgba(56, 189, 248, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Real-World Deployment & Offline RL',
+                    data: [2, 9, 2, 1],
+                    backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                    borderColor: 'rgba(34, 197, 94, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'Game Theory & Multi-Agent Research',
+                    data: [4, 3, 10, 5],
+                    backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { display: false },
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { color: '#e2e8f0' },
+                        ticks: {
+                            color: '#475569',
+                            font: { size: 12 }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#475569',
+                            padding: 20,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        titleFont: { size: 14 },
+                        bodyFont: { size: 12 },
+                        padding: 10,
+                        cornerRadius: 4,
+                        displayColors: true,
+                    },
+                    title: {
+                        display: true,
+                        text: 'Conceptual Focus of RL Frameworks',
+                        color: '#1e293b',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            bottom: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 15-Week Schedule Rendering ---
+        const scheduleContainer = document.getElementById('weekly-schedule-container');
+        appData.schedule.forEach(weekData => {
+            const weekCard = document.createElement('div');
+            weekCard.className = 'bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden';
+
+            const headerButton = document.createElement('button');
+            headerButton.className = 'w-full p-6 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 rounded-xl';
+            headerButton.setAttribute('data-target', `week-${weekData.week}-content`);
+            headerButton.innerHTML = `
+            <h3 class="text-lg font-bold text-slate-900">Week ${weekData.week}: ${weekData.focus}</h3>
+            <span class="text-slate-500 text-xl">▼</span>
+        `;
+            weekCard.appendChild(headerButton);
+
+            const contentDiv = document.createElement('div');
+            contentDiv.id = `week-${weekData.week}-content`;
+            contentDiv.className = 'expandable-content px-6 pb-6 text-slate-600 text-sm';
+            contentDiv.innerHTML = `
+            <p class="mt-4"><strong>Goals:</strong> ${weekData.goals}</p>
+            <p class="mt-2 text-slate-500"><em>Spend ~10 hours divided into theory and practical work. End with mini-projects or quizzes.</em></p>
+        `;
+            weekCard.appendChild(contentDiv);
+            scheduleContainer.appendChild(weekCard);
+        });
+
+        // Event listener for schedule card expansion
+        document.querySelectorAll('#weekly-schedule-container button[data-target]').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.classList.toggle('open');
+                    button.querySelector('span').textContent = targetElement.classList.contains('open') ? '▲' : '▼';
+                }
+            });
+        });
+
+    });
+</script>
+</body>
+</html>
