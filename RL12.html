@@ -1522,15 +1522,15 @@
         <div class="exercise-solution">
           <p><strong>Step 1: Probability of drawing the first red ball.</strong></p>
           <p>There are 5 red balls out of a total of $5 + 3 = 8$ balls.</p>
-          <p>$P(\\text{1st ball is red}) = \\frac{5}{8}$</p>
+          <p>$P(\text{1st ball is red}) = \frac{5}{8}$</p>
           <p><strong>Step 2: Probability of drawing the second red ball (given the first was red and not replaced).</strong></p>
           <p>After drawing one red ball, there are now 4 red balls left and a total of 7 balls remaining in the bag.</p>
-          <p>$P(\\text{2nd ball is red | 1st is red}) = \\frac{4}{7}$</p>
+          <p>$P(\text{2nd ball is red | 1st is red}) = \frac{4}{7}$</p>
           <p><strong>Step 3: Calculate the joint probability.</strong></p>
           <p>The probability that both balls are red is the product of the probabilities from Step 1 and Step 2:</p>
-          <p>$P(\\text{both balls are red}) = P(\\text{1st is red}) \\times P(\\text{2nd is red | 1st is red})$</p>
-          <p>$P(\\text{both balls are red}) = \\frac{5}{8} \\times \\frac{4}{7} = \\frac{20}{56} = \\frac{5}{14}$</p>
-          <p>Therefore, the probability that both balls are red is $\\frac{5}{14}$ (approximately 0.357).</p>
+          <p>$P(\text{both balls are red}) = P(\text{1st is red}) \times P(\text{2nd is red | 1st is red})$</p>
+          <p>$P(\text{both balls are red}) = \frac{5}{8} \times \frac{4}{7} = \frac{20}{56} = \frac{5}{14}$</p>
+          <p>Therefore, the probability that both balls are red is $\frac{5}{14}$ (approximately 0.357).</p>
         </div>
       </div>
 
@@ -1542,7 +1542,7 @@
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for expected value.</strong></p>
           <p>For a discrete random variable $X$ with outcomes $x_i$ and probabilities $P(X=x_i)$, the expected value $E[X]$ is given by:</p>
-          <p>$E[X] = \\sum x_i P(X=x_i)$</p>
+          <p>$E[X] = \sum x_i P(X=x_i)$</p>
           <p><strong>Step 2: Identify the outcomes and their probabilities.</strong></p>
           <ul>
             <li>$x_1 = 10$, $P(X=10) = 0.3$</li>
@@ -1550,9 +1550,9 @@
             <li>$x_3 = 2$, $P(X=2) = 0.2$</li>
           </ul>
           <p><strong>Step 3: Calculate the expected value.</strong></p>
-          <p>$E[\\text{Reward}] = (10)(0.3) + (-5)(0.5) + (2)(0.2)$</p>
-          <p>$E[\\text{Reward}] = 3.0 - 2.5 + 0.4$</p>
-          <p>$E[\\text{Reward}] = 0.9$</p>
+          <p>$E[\text{Reward}] = (10)(0.3) + (-5)(0.5) + (2)(0.2)$</p>
+          <p>$E[\text{Reward}] = 3.0 - 2.5 + 0.4$</p>
+          <p>$E[\text{Reward}] = 0.9$</p>
           <p>The expected reward for this agent is 0.9.</p>
         </div>
       </div>
@@ -1569,7 +1569,7 @@
           <p>$P(A \cup B) = 0.4 + 0.5 - 0.2$</p>
           <p>$P(A \cup B) = 0.9 - 0.2$</p>
           <p>$P(A \cup B) = 0.7$</p>
-          <p>The probability of $A \\cup B$ is 0.7.</p>
+          <p>The probability of $A \cup B$ is 0.7.</p>
         </div>
       </div>
 
@@ -1598,8 +1598,8 @@
           <p>Favorable outcomes (landing on Blue): 1</p>
           <p>Total possible outcomes: 4 (Red, Blue, Green, Yellow)</p>
           <p><strong>Step 2: Calculate the probability.</strong></p>
-          <p>$P(\\text{Blue}) = \\frac{\\text{Number of favorable outcomes}}{\\text{Total number of outcomes}} = \\frac{1}{4}$</p>
-          <p>The probability of landing on Blue is $\\frac{1}{4}$ or 0.25.</p>
+          <p>$P(\text{Blue}) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}} = \frac{1}{4}$</p>
+          <p>The probability of landing on Blue is $\frac{1}{4}$ or 0.25.</p>
         </div>
       </div>
 
@@ -1611,7 +1611,7 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for variance.</strong></p>
-          <p>The variance $Var(X)$ is given by $Var(X) = E[(X - E[X])^2] = \\sum (x_i - E[X])^2 P(X=x_i)$.</p>
+          <p>The variance $Var(X)$ is given by $Var(X) = E[(X - E[X])^2] = \sum (x_i - E[X])^2 P(X=x_i)$.</p>
           <p>We already have $E[X] = 0.9$.</p>
           <p><strong>Step 2: Calculate $(x_i - E[X])^2$ for each outcome.</strong></p>
           <ul>
@@ -1634,13 +1634,13 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Identify possible outcomes and their probabilities.</strong></p>
-          <p>Even numbers: {2, 4, 6}. Probability $P(\\text{Even}) = 3/6 = 0.5$. Reward = +3.</p>
-          <p>Odd numbers: {1, 3, 5}. Probability $P(\\text{Odd}) = 3/6 = 0.5$. Reward = -2.</p>
+          <p>Even numbers: {2, 4, 6}. Probability $P(\text{Even}) = 3/6 = 0.5$. Reward = +3.</p>
+          <p>Odd numbers: {1, 3, 5}. Probability $P(\text{Odd}) = 3/6 = 0.5$. Reward = -2.</p>
           <p><strong>Step 2: Apply the expected value formula.</strong></p>
-          <p>$E[X] = \\sum x_i P(X=x_i)$</p>
-          <p>$E[\\text{Points}] = (3 \\cdot 0.5) + (-2 \\cdot 0.5)$</p>
-          <p>$E[\\text{Points}] = 1.5 - 1.0$</p>
-          <p>$E[\\text{Points}] = 0.5$</p>
+          <p>$E[X] = \sum x_i P(X=x_i)$</p>
+          <p>$E[\text{Points}] = (3 \cdot 0.5) + (-2 \cdot 0.5)$</p>
+          <p>$E[\text{Points}] = 1.5 - 1.0$</p>
+          <p>$E[\text{Points}] = 0.5$</p>
           <p>The expected value of rolling the die is 0.5 points.</p>
         </div>
       </div>
@@ -1655,15 +1655,15 @@
           <p>Let $D$ be the event that a citizen owns a dog, and $C$ be the event that a citizen owns a cat.</p>
           <p>$P(D) = 0.30$</p>
           <p>$P(C) = 0.40$</p>
-          <p>$P(D \\cap C) = 0.15$ (probability of owning both)</p>
-          <p>We want to find $P(D^c \\cap C^c)$, which is the probability of owning neither.</p>
+          <p>$P(D \cap C) = 0.15$ (probability of owning both)</p>
+          <p>We want to find $P(D^c \cap C^c)$, which is the probability of owning neither.</p>
           <p><strong>Step 2: Use the formula for the union of two events.</strong></p>
-          <p>$P(D \\cup C) = P(D) + P(C) - P(D \\cap C)$</p>
-          <p>$P(D \\cup C) = 0.30 + 0.40 - 0.15 = 0.70 - 0.15 = 0.55$</p>
+          <p>$P(D \cup C) = P(D) + P(C) - P(D \\cap C)$</p>
+          <p>$P(D \cup C) = 0.30 + 0.40 - 0.15 = 0.70 - 0.15 = 0.55$</p>
           <p>This is the probability that a citizen owns at least one pet (dog or cat or both).</p>
           <p><strong>Step 3: Use the complement rule to find the probability of owning neither.</strong></p>
-          <p>$P(\\text{neither}) = P((D \\cup C)^c) = 1 - P(D \\cup C)$</p>
-          <p>$P(\\text{neither}) = 1 - 0.55 = 0.45$</p>
+          <p>$P(\text{neither}) = P((D \cup C)^c) = 1 - P(D \cup C)$</p>
+          <p>$P(\text{neither}) = 1 - 0.55 = 0.45$</p>
           <p>Therefore, 45% of citizens own neither a dog nor a cat.</p>
         </div>
       </div>
@@ -1689,13 +1689,13 @@
           </ul>
           <p>We want to find $P(D|T)$, the probability a person who tests positive actually has the disease.</p>
           <p><strong>Step 2: Apply Bayes' Theorem.</strong></p>
-          <p>$P(D|T) = \\frac{P(T|D) \\cdot P(D)}{P(T)}$</p>
+          <p>$P(D|T) = \frac{P(T|D) \cdot P(D)}{P(T)}$</p>
           <p><strong>Step 3: Calculate $P(T)$ using the law of total probability.</strong></p>
           <p>$P(T) = P(T|D)P(D) + P(T|D^c)P(D^c)$</p>
           <p>$P(T) = (0.95)(0.005) + (0.01)(0.995)$</p>
           <p>$P(T) = 0.00475 + 0.00995 = 0.0147$</p>
           <p><strong>Step 4: Substitute values into Bayes' Theorem.</strong></p>
-          <p>$P(D|T) = \\frac{0.00475}{0.0147} \\approx 0.3238$</p>
+          <p>$P(D|T) = \frac{0.00475}{0.0147} \approx 0.3238$</p>
           <p>Therefore, if a person tests positive, there is approximately a 32.38% chance they actually have the disease.</p>
         </div>
       </div>
@@ -1708,13 +1708,13 @@
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for KL Divergence.</strong></p>
           <p>For discrete distributions $P$ and $Q$, the KL divergence is:</p>
-          <p>$D_{KL}(P \\|\\| Q) = \\sum_{i} P(i) \\log \\left( \\frac{P(i)}{Q(i)} \\right)$</p>
+          <p>$D_{KL}(P \\|\\| Q) = \sum_{i} P(i) \log \left( \frac{P(i)}{Q(i)} \right)$</p>
           <p>Using natural logarithm (ln).</p>
           <p><strong>Step 2: Calculate each term of the sum.</strong></p>
           <ul>
-            <li>Term 1: $0.2 \\cdot \\log(0.2 / 0.1) = 0.2 \\cdot \\log(2) \\approx 0.2 \\cdot 0.693 = 0.1386$</li>
-            <li>Term 2: $0.3 \\cdot \\log(0.3 / 0.4) = 0.3 \\cdot \\log(0.75) \\approx 0.3 \\cdot (-0.287) = -0.0861$</li>
-            <li>Term 3: $0.5 \\cdot \\log(0.5 / 0.5) = 0.5 \\cdot \\log(1) = 0.5 \\cdot 0 = 0$</li>
+            <li>Term 1: $0.2 \cdot \log(0.2 / 0.1) = 0.2 \cdot \log(2) \approx 0.2 \cdot 0.693 = 0.1386$</li>
+            <li>Term 2: $0.3 \cdot \log(0.3 / 0.4) = 0.3 \cdot \log(0.75) \approx 0.3 \cdot (-0.287) = -0.0861$</li>
+            <li>Term 3: $0.5 \cdot \log(0.5 / 0.5) = 0.5 \cdot \log(1) = 0.5 \cdot 0 = 0$</li>
           </ul>
           <p><strong>Step 3: Sum the terms.</strong></p>
           <p>$D_{KL}(P \\|\\| Q) = 0.1386 - 0.0861 + 0 = 0.0525$</p>
@@ -1746,7 +1746,7 @@
           </ul>
           <p>We want to find $P(D|T^c)$.</p>
           <p><strong>Step 2: Apply Bayes' Theorem.</strong></p>
-          <p>$P(D|T^c) = \\frac{P(T^c|D) \\cdot P(D)}{P(T^c)}$</p>
+          <p>$P(D|T^c) = \frac{P(T^c|D) \cdot P(D)}{P(T^c)}$</p>
           <p><strong>Step 3: Calculate $P(T^c|D)$.</strong></p>
           <p>$P(T^c|D) = 1 - P(T|D) = 1 - 0.99 = 0.01$ (False negative rate)</p>
           <p><strong>Step 4: Calculate $P(T^c)$ using the law of total probability.</strong></p>
@@ -1754,33 +1754,33 @@
           <p>$P(T^c) = (0.01)(0.01) + (0.98)(0.99)$</p>
           <p>$P(T^c) = 0.0001 + 0.9702 = 0.9703$</p>
           <p><strong>Step 5: Substitute values into Bayes' Theorem.</strong></p>
-          <p>$P(D|T^c) = \\frac{0.01 \\cdot 0.01}{0.9703} = \\frac{0.0001}{0.9703} \\approx 0.000103$</p>
+          <p>$P(D|T^c) = \frac{0.01 \cdot 0.01}{0.9703} = \frac{0.0001}{0.9703} \approx 0.000103$</p>
           <p>The probability that a person who tests negative actually has the disease is extremely low, approximately 0.0103%.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          12. A continuous random variable $X$ has a probability density function $f(x) = \frac{1}{2}e^{-x/2}$ for $x \\ge 0$, and $f(x) = 0$ for $x < 0$. Find the expected value $E[X]$.
+          12. A continuous random variable $X$ has a probability density function $f(x) = \frac{1}{2}e^{-x/2}$ for $x \ge 0$, and $f(x) = 0$ for $x < 0$. Find the expected value $E[X]$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for expected value of a continuous random variable.</strong></p>
-          <p>$E[X] = \\int_{-\\infty}^{\\infty} x f(x) dx$</p>
-          <p>Since $f(x)=0$ for $x < 0$, the integral limits become from $0$ to $\\infty$.</p>
-          <p>$E[X] = \\frac{1}{2} \\int_{0}^{\\infty} x e^{-x/2} dx$</p>
-          <p><strong>Step 2: Use integration by parts formula: $\\int u \\, dv = uv - \\int v \\, du$.</strong></p>
+          <p>$E[X] = \int_{-\infty}^{\infty} x f(x) dx$</p>
+          <p>Since $f(x)=0$ for $x < 0$, the integral limits become from $0$ to $\infty$.</p>
+          <p>$E[X] = \frac{1}{2} \int_{0}^{\infty} x e^{-x/2} dx$</p>
+          <p><strong>Step 2: Use integration by parts formula: $\int u \\, dv = uv - \int v \\, du$.</strong></p>
           <p>Let $u = x$, so $du = dx$.</p>
           <p>Let $dv = e^{-x/2} dx$, so $v = -2e^{-x/2}$.</p>
           <p><strong>Step 3: Apply integration by parts.</strong></p>
-          <p>$\\int_{0}^{\\infty} x e^{-x/2} dx = [-2x e^{-x/2}]_{0}^{\\infty} - \\int_{0}^{\\infty} (-2e^{-x/2}) dx$</p>
-          <p>Evaluate the first term: $\\lim_{x\\to\\infty}(-2x e^{-x/2}) - (-2 \\cdot 0 \\cdot e^0) = 0 - 0 = 0$. (Using L'Hopital's rule for the limit if needed)</p>
+          <p>$\int_{0}^{\infty} x e^{-x/2} dx = [-2x e^{-x/2}]_{0}^{\infty} - \int_{0}^{\infty} (-2e^{-x/2}) dx$</p>
+          <p>Evaluate the first term: $\lim_{x\to\infty}(-2x e^{-x/2}) - (-2 \cdot 0 \cdot e^0) = 0 - 0 = 0$. (Using L'Hopital's rule for the limit if needed)</p>
           <p>Evaluate the second integral:</p>
-          <p>$ -\\int_{0}^{\\infty} (-2e^{-x/2}) dx = 2 \\int_{0}^{\\infty} e^{-x/2} dx = 2 [-2e^{-x/2}]_{0}^{\\infty}$</p>
-          <p>$= 2 [(\\lim_{x\\to\\infty}(-2e^{-x/2})) - (-2e^0)] = 2 [0 - (-2)] = 2(2) = 4$</p>
+          <p>$ -\int_{0}^{\infty} (-2e^{-x/2}) dx = 2 \int_{0}^{\infty} e^{-x/2} dx = 2 [-2e^{-x/2}]_{0}^{\infty}$</p>
+          <p>$= 2 [(\lim_{x\to\infty}(-2e^{-x/2})) - (-2e^0)] = 2 [0 - (-2)] = 2(2) = 4$</p>
           <p><strong>Step 4: Combine the results.</strong></p>
-          <p>$E[X] = \\frac{1}{2} \\cdot 4 = 2$</p>
-          <p>The expected value $E[X]$ is 2. (This is the expected value of an exponential distribution with rate $\\lambda = 1/2$, where $E[X]=1/\\lambda=2$).</p>
+          <p>$E[X] = \frac{1}{2} \cdot 4 = 2$</p>
+          <p>The expected value $E[X]$ is 2. (This is the expected value of an exponential distribution with rate $\lambda = 1/2$, where $E[X]=1/\lambda=2$).</p>
         </div>
       </div>
 
@@ -1814,7 +1814,7 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for the L2 norm of a vector.</strong></p>
-          <p>For a vector $\mathbf{w} = \begin{pmatrix} w_1 \\\\\\\\ w_2 \\\\\\\\ \vdots \\\\\\\\ w_n \end{pmatrix}$, its L2 norm is $||\mathbf{w}||_2 = \sqrt{w_1^2 + w_2^2 + \\dots + w_n^2}$.</p>
+          <p>For a vector $\mathbf{w} = \begin{pmatrix} w_1 \\\\\\\\ w_2 \\\\\\\\ \vdots \\\\\\\\ w_n \end{pmatrix}$, its L2 norm is $||\mathbf{w}||_2 = \sqrt{w_1^2 + w_2^2 + \dots + w_n^2}$.</p>
           <p><strong>Step 2: Substitute the components of $\mathbf{w}$ into the formula.</strong></p>
           <p>$||\mathbf{w}||_2 = \sqrt{3^2 + (-4)^2 + 0^2}$</p>
           <p><strong>Step 3: Calculate the squares and sum them.</strong></p>
@@ -1845,38 +1845,38 @@
 
       <div class="exercise-card">
         <div class="exercise-question">
-          16. Given matrices $A = \begin{pmatrix} 1 & 0 \\\\\\\\ 2 & 3 \end{pmatrix}$ and $B = \\begin{pmatrix} 4 & 5 \\\\\\\\ 6 & 7 \\end{pmatrix}$, calculate $A + B$.
+          16. Given matrices $A = \begin{pmatrix} 1 & 0 \\\\\\\\ 2 & 3 \end{pmatrix}$ and $B = \begin{pmatrix} 4 & 5 \\\\\\\\ 6 & 7 \end{pmatrix}$, calculate $A + B$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall matrix addition rule.</strong></p>
           <p>To add two matrices of the same dimensions, you add their corresponding elements.</p>
           <p><strong>Step 2: Add the corresponding elements.</strong></p>
-          <p>$A + B = \\begin{pmatrix} 1+4 & 0+5 \\\\\\\\ 2+6 & 3+7 \\end{pmatrix}$</p>
+          <p>$A + B = \begin{pmatrix} 1+4 & 0+5 \\\\\\\\ 2+6 & 3+7 \end{pmatrix}$</p>
           <p><strong>Step 3: Perform the additions.</strong></p>
-          <p>$A + B = \\begin{pmatrix} 5 & 5 \\\\\\\\ 8 & 10 \\end{pmatrix}$</p>
-          <p>The sum of matrices $A$ and $B$ is $\\begin{pmatrix} 5 & 5 \\\\\\\\ 8 & 10 \\end{pmatrix}$.</p>
+          <p>$A + B = \begin{pmatrix} 5 & 5 \\\\\\\\ 8 & 10 \end{pmatrix}$</p>
+          <p>The sum of matrices $A$ and $B$ is $\begin{pmatrix} 5 & 5 \\\\\\\\ 8 & 10 \end{pmatrix}$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          17. What is the dimension of the vector $\\mathbf{v} = \\begin{pmatrix} 7 \\\\\\\\ -2 \\\\\\\\ 5 \\end{pmatrix}$?
+          17. What is the dimension of the vector $\mathbf{v} = \begin{pmatrix} 7 \\\\\\\\ -2 \\\\\\\\ 5 \end{pmatrix}$?
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Count the number of components in the vector.</strong></p>
-          <p>The vector $\\mathbf{v}$ has 3 components: 7, -2, and 5.</p>
+          <p>The vector $\mathbf{v}$ has 3 components: 7, -2, and 5.</p>
           <p><strong>Step 2: Determine the dimension.</strong></p>
           <p>The dimension of a vector is the number of its components.</p>
-          <p>Therefore, the dimension of $\\mathbf{v}$ is 3.</p>
+          <p>Therefore, the dimension of $\mathbf{v}$ is 3.</p>
         </div>
       </div>
 
       <h4>Medium Exercises</h4>
       <div class="exercise-card">
         <div class="exercise-question">
-          18. Given matrices $A = \\begin{pmatrix} 1 & 2 \\\\\\\\ 3 & 4 \\end{pmatrix}$ and $B = \\begin{pmatrix} 5 & 6 \\\\\\\\ 7 & 8 \\end{pmatrix}$, calculate the product $AB$.
+          18. Given matrices $A = \begin{pmatrix} 1 & 2 \\\\\\\\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 5 & 6 \\\\\\\\ 7 & 8 \end{pmatrix}$, calculate the product $AB$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
@@ -1895,53 +1895,53 @@
           <p>Row 2 of A: $[3, 4]$, Column 2 of B: $[6, 8]^T$</p>
           <p>$C_{22} = (3)(6) + (4)(8) = 18 + 32 = 50$</p>
           <p><strong>Step 6: Form the resulting matrix.</strong></p>
-          <p>$AB = \\begin{pmatrix} 19 & 22 \\\\\\\\ 43 & 50 \\end{pmatrix}$</p>
+          <p>$AB = \begin{pmatrix} 19 & 22 \\\\\\\\ 43 & 50 \end{pmatrix}$</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          19. Given vectors $\\mathbf{a} = \\begin{pmatrix} 5 \\\\\\\\ 1 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} 2 \\\\\\\\ 3 \\end{pmatrix}$, calculate the magnitude of their difference, $||\\mathbf{a} - \\mathbf{b}||_2$.
+          19. Given vectors $\mathbf{a} = \begin{pmatrix} 5 \\\\\\\\ 1 \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} 2 \\\\\\\\ 3 \end{pmatrix}$, calculate the magnitude of their difference, $||\mathbf{a} - \mathbf{b}||_2$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
-          <p><strong>Step 1: Calculate the difference vector $\\mathbf{a} - \\mathbf{b}$.</strong></p>
-          <p>$\\mathbf{a} - \\mathbf{b} = \\begin{pmatrix} 5 - 2 \\\\\\\\ 1 - 3 \\end{pmatrix} = \\begin{pmatrix} 3 \\\\\\\\ -2 \\end{pmatrix}$</p>
+          <p><strong>Step 1: Calculate the difference vector $\mathbf{a} - \mathbf{b}$.</strong></p>
+          <p>$\mathbf{a} - \mathbf{b} = \begin{pmatrix} 5 - 2 \\\\\\\\ 1 - 3 \end{pmatrix} = \begin{pmatrix} 3 \\\\\\\\ -2 \end{pmatrix}$</p>
           <p><strong>Step 2: Calculate the Euclidean (L2) norm of the resulting vector.</strong></p>
-          <p>$||\\mathbf{a} - \\mathbf{b}||_2 = \\sqrt{3^2 + (-2)^2}$</p>
-          <p>$||\\mathbf{a} - \\mathbf{b}||_2 = \\sqrt{9 + 4}$</p>
-          <p>$||\\mathbf{a} - \\mathbf{b}||_2 = \\sqrt{13}$</p>
-          <p>The magnitude of the difference is $\\sqrt{13}$.</p>
+          <p>$||\mathbf{a} - \mathbf{b}||_2 = \sqrt{3^2 + (-2)^2}$</p>
+          <p>$||\mathbf{a} - \mathbf{b}||_2 = \sqrt{9 + 4}$</p>
+          <p>$||\mathbf{a} - \mathbf{b}||_2 = \sqrt{13}$</p>
+          <p>The magnitude of the difference is $\sqrt{13}$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          20. Calculate the product of matrix $A = \\begin{pmatrix} 2 & 1 \\\\\\\\ 0 & 3 \\end{pmatrix}$ and vector $\\mathbf{x} = \\begin{pmatrix} 4 \\\\\\\\ 5 \\end{pmatrix}$.
+          20. Calculate the product of matrix $A = \begin{pmatrix} 2 & 1 \\\\\\\\ 0 & 3 \end{pmatrix}$ and vector $\mathbf{x} = \begin{pmatrix} 4 \\\\\\\\ 5 \end{pmatrix}$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the rule for matrix-vector multiplication.</strong></p>
-          <p>If $A$ is an $m \\times n$ matrix and $\\mathbf{x}$ is an $n \\times 1$ column vector, then $A\\mathbf{x}$ is an $m \\times 1$ column vector. Each element of the resulting vector is the dot product of the corresponding row of $A$ and the vector $\\mathbf{x}$.</p>
+          <p>If $A$ is an $m \times n$ matrix and $\mathbf{x}$ is an $n \times 1$ column vector, then $A\mathbf{x}$ is an $m \times 1$ column vector. Each element of the resulting vector is the dot product of the corresponding row of $A$ and the vector $\mathbf{x}$.</p>
           <p><strong>Step 2: Perform the dot product for each row.</strong></p>
-          <p>First row: $(2 \\cdot 4) + (1 \\cdot 5) = 8 + 5 = 13$</p>
-          <p>Second row: $(0 \\cdot 4) + (3 \\cdot 5) = 0 + 15 = 15$</p>
+          <p>First row: $(2 \cdot 4) + (1 \cdot 5) = 8 + 5 = 13$</p>
+          <p>Second row: $(0 \cdot 4) + (3 \cdot 5) = 0 + 15 = 15$</p>
           <p><strong>Step 3: Form the resulting vector.</strong></p>
-          <p>$A\\mathbf{x} = \\begin{pmatrix} 13 \\\\\\\\ 15 \\end{pmatrix}$</p>
-          <p>The product is $\\begin{pmatrix} 13 \\\\\\\\ 15 \\end{pmatrix}$.</p>
+          <p>$A\mathbf{x} = \begin{pmatrix} 13 \\\\\\\\ 15 \end{pmatrix}$</p>
+          <p>The product is $\begin{pmatrix} 13 \\\\\\\\ 15 \end{pmatrix}$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          21. Find the trace of the matrix $M = \\begin{pmatrix} 1 & 2 & 3 \\\\\\\\ 4 & 5 & 6 \\\\\\\\ 7 & 8 & 9 \\end{pmatrix}$.
+          21. Find the trace of the matrix $M = \begin{pmatrix} 1 & 2 & 3 \\\\\\\\ 4 & 5 & 6 \\\\\\\\ 7 & 8 & 9 \end{pmatrix}$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the definition of the trace of a square matrix.</strong></p>
           <p>The trace of a square matrix is the sum of the elements on its main diagonal (from the upper left to the lower right).</p>
           <p><strong>Step 2: Identify the diagonal elements.</strong></p>
-          <p>For $M = \\begin{pmatrix} 1 & 2 & 3 \\\\\\\\ 4 & 5 & 6 \\\\\\\\ 7 & 8 & 9 \\end{pmatrix}$, the diagonal elements are 1, 5, and 9.</p>
+          <p>For $M = \begin{pmatrix} 1 & 2 & 3 \\\\\\\\ 4 & 5 & 6 \\\\\\\\ 7 & 8 & 9 \end{pmatrix}$, the diagonal elements are 1, 5, and 9.</p>
           <p><strong>Step 3: Sum the diagonal elements.</strong></p>
           <p>$Trace(M) = 1 + 5 + 9 = 15$</p>
           <p>The trace of matrix $M$ is 15.</p>
@@ -1951,55 +1951,55 @@
       <h4>Hard Exercises</h4>
       <div class="exercise-card">
         <div class="exercise-question">
-          22. Find the inverse of the matrix $A = \\begin{pmatrix} 4 & 7 \\\\\\\\ 2 & 6 \\end{pmatrix}$.
+          22. Find the inverse of the matrix $A = \begin{pmatrix} 4 & 7 \\\\\\\\ 2 & 6 \end{pmatrix}$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for the inverse of a 2x2 matrix.</strong></p>
-          <p>For a matrix $A = \\begin{pmatrix} a & b \\\\\\\\ c & d \\end{pmatrix}$, its inverse $A^{-1}$ is given by:</p>
-          <p>$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\\\\\ -c & a \\end{pmatrix}$</p>
+          <p>For a matrix $A = \begin{pmatrix} a & b \\\\\\\\ c & d \end{pmatrix}$, its inverse $A^{-1}$ is given by:</p>
+          <p>$A^{-1} = \frac{1}{ad - bc} \begin{pmatrix} d & -b \\\\\\\\ -c & a \end{pmatrix}$</p>
           <p>The term $ad - bc$ is the determinant of $A$, denoted $det(A)$.</p>
           <p><strong>Step 2: Calculate the determinant of $A$.</strong></p>
           <p>$det(A) = (4)(6) - (7)(2) = 24 - 14 = 10$</p>
           <p><strong>Step 3: Apply the inverse formula.</strong></p>
-          <p>$A^{-1} = \\frac{1}{10} \\begin{pmatrix} 6 & -7 \\\\\\\\ -2 & 4 \\end{pmatrix}$</p>
+          <p>$A^{-1} = \frac{1}{10} \begin{pmatrix} 6 & -7 \\\\\\\\ -2 & 4 \end{pmatrix}$</p>
           <p><strong>Step 4: Multiply by the scalar $\\frac{1}{10}$.</strong></p>
-          <p>$A^{-1} = \\begin{pmatrix} 6/10 & -7/10 \\\\\\\\ -2/10 & 4/10 \\end{pmatrix} = \\begin{pmatrix} 0.6 & -0.7 \\\\\\\\ -0.2 & 0.4 \\end{pmatrix}$</p>
-          <p>The inverse of matrix $A$ is $\\begin{pmatrix} 0.6 & -0.7 \\\\\\\\ -0.2 & 0.4 \\end{pmatrix}$.</p>
+          <p>$A^{-1} = \begin{pmatrix} 6/10 & -7/10 \\\\\\\\ -2/10 & 4/10 \end{pmatrix} = \begin{pmatrix} 0.6 & -0.7 \\\\\\\\ -0.2 & 0.4 \end{pmatrix}$</p>
+          <p>The inverse of matrix $A$ is $\begin{pmatrix} 0.6 & -0.7 \\\\\\\\ -0.2 & 0.4 \end{pmatrix}$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          23. For a matrix $A = \\begin{pmatrix} 2 & 1 \\\\\\\\ 1 & 2 \\end{pmatrix}$, set up the characteristic equation to find its eigenvalues. (No need to solve for eigenvalues)
+          23. For a matrix $A = \begin{pmatrix} 2 & 1 \\\\\\\\ 1 & 2 \end{pmatrix}$, set up the characteristic equation to find its eigenvalues. (No need to solve for eigenvalues)
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the characteristic equation for eigenvalues.</strong></p>
-          <p>For a square matrix $A$, its eigenvalues $\\lambda$ are found by solving the characteristic equation:</p>
-          <p>$det(A - \\lambda I) = 0$</p>
+          <p>For a square matrix $A$, its eigenvalues $\lambda$ are found by solving the characteristic equation:</p>
+          <p>$det(A - \lambda I) = 0$</p>
           <p>where $I$ is the identity matrix of the same dimension as $A$.</p>
-          <p><strong>Step 2: Form the matrix $(A - \\lambda I)$.</strong></p>
-          <p>$A - \\lambda I = \\begin{pmatrix} 2 & 1 \\\\\\\\ 1 & 2 \\end{pmatrix} - \\lambda \\begin{pmatrix} 1 & 0 \\\\\\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 - \\lambda & 1 \\\\\\\\ 1 & 2 - \\lambda \\end{pmatrix}$</p>
-          <p><strong>Step 3: Calculate the determinant of $(A - \\lambda I)$.</strong></p>
-          <p>$det(A - \\lambda I) = (2 - \\lambda)(2 - \\lambda) - (1)(1)$</p>
-          <p>$det(A - \\lambda I) = (2 - \\lambda)^2 - 1$</p>
+          <p><strong>Step 2: Form the matrix $(A - \lambda I)$.</strong></p>
+          <p>$A - \lambda I = \begin{pmatrix} 2 & 1 \\\\\\\\ 1 & 2 \end{pmatrix} - \lambda \begin{pmatrix} 1 & 0 \\\\\\\\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 - \lambda & 1 \\\\\\\\ 1 & 2 - \lambda \end{pmatrix}$</p>
+          <p><strong>Step 3: Calculate the determinant of $(A - \lambda I)$.</strong></p>
+          <p>$det(A - \lambda I) = (2 - \lambda)(2 - \lambda) - (1)(1)$</p>
+          <p>$det(A - \lambda I) = (2 - \lambda)^2 - 1$</p>
           <p><strong>Step 4: Set the determinant to zero to form the characteristic equation.</strong></p>
-          <p>$(2 - \\lambda)^2 - 1 = 0$</p>
+          <p>$(2 - \lambda)^2 - 1 = 0$</p>
           <p>This is the characteristic equation used to find the eigenvalues of matrix $A$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          24. Given two vectors $\\mathbf{a} = \\begin{pmatrix} 1 \\\\\\\\ 2 \\\\\\\\ 3 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} 4 \\\\\\\\ 5 \\\\\\\\ 6 \\end{pmatrix}$, calculate their cross product $\\mathbf{a} \\times \\mathbf{b}$.
+          24. Given two vectors $\mathbf{a} = \begin{pmatrix} 1 \\\\\\\\ 2 \\\\\\\\ 3 \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} 4 \\\\\\\\ 5 \\\\\\\\ 6 \end{pmatrix}$, calculate their cross product $\mathbf{a} \times \mathbf{b}$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the formula for the cross product of 3D vectors.</strong></p>
-          <p>For $\\mathbf{a} = \\begin{pmatrix} a_1 \\\\\\\\ a_2 \\\\\\\\ a_3 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} b_1 \\\\\\\\ b_2 \\\\\\\\ b_3 \\end{pmatrix}$, their cross product is:</p>
-          <p>$\\mathbf{a} \\times \\mathbf{b} = \\begin{pmatrix} a_2 b_3 - a_3 b_2 \\\\\\\\ a_3 b_1 - a_1 b_3 \\\\\\\\ a_1 b_2 - a_2 b_1 \\end{pmatrix}$</p>
-          <p><strong>Step 2: Substitute the components of $\\mathbf{a}$ and $\\mathbf{b}$.</strong></p>
+          <p>For $\mathbf{a} = \begin{pmatrix} a_1 \\\\\\\\ a_2 \\\\\\\\ a_3 \end{pmatrix}$ and $\mathbf{b} = \begin{pmatrix} b_1 \\\\\\\\ b_2 \\\\\\\\ b_3 \end{pmatrix}$, their cross product is:</p>
+          <p>$\mathbf{a} \times \mathbf{b} = \begin{pmatrix} a_2 b_3 - a_3 b_2 \\\\\\\\ a_3 b_1 - a_1 b_3 \\\\\\\\ a_1 b_2 - a_2 b_1 \end{pmatrix}$</p>
+          <p><strong>Step 2: Substitute the components of $\mathbf{a}$ and $\mathbf{b}$.</strong></p>
           <ul>
             <li>$a_1=1, a_2=2, a_3=3$</li>
             <li>$b_1=4, b_2=5, b_3=6$</li>
@@ -2011,8 +2011,8 @@
             <li>Component 3: $(1)(5) - (2)(4) = 5 - 8 = -3$</li>
           </ul>
           <p><strong>Step 4: Form the resulting cross product vector.</strong></p>
-          <p>$\\mathbf{a} \\times \\mathbf{b} = \\begin{pmatrix} -3 \\\\\\\\ 6 \\\\\\\\ -3 \\end{pmatrix}$</p>
-          <p>The cross product of $\\mathbf{a}$ and $\\mathbf{b}$ is $\\begin{pmatrix} -3 \\\\\\\\ 6 \\\\\\\\ -3 \\end{pmatrix}$.</p>
+          <p>$\mathbf{a} \times \mathbf{b} = \begin{pmatrix} -3 \\\\\\\\ 6 \\\\\\\\ -3 \end{pmatrix}$</p>
+          <p>The cross product of $\mathbf{a}$ and $\mathbf{b}$ is $\begin{pmatrix} -3 \\\\\\\\ 6 \\\\\\\\ -3 \end{pmatrix}$.</p>
         </div>
       </div>
 
@@ -2029,16 +2029,16 @@
           <p>Let $u = x^2 + 1$ (inner function)</p>
           <p>Let $f(u) = u^3$ (outer function)</p>
           <p><strong>Step 2: Find the derivative of the outer function with respect to $u$.</strong></p>
-          <p>$\\frac{df}{du} = \\frac{d}{du}(u^3) = 3u^2$</p>
+          <p>$\frac{df}{du} = \frac{d}{du}(u^3) = 3u^2$</p>
           <p><strong>Step 3: Find the derivative of the inner function with respect to $x$.</strong></p>
-          <p>$\\frac{du}{dx} = \\frac{d}{dx}(x^2 + 1) = 2x + 0 = 2x$</p>
-          <p><strong>Step 4: Apply the Chain Rule: $\\frac{df}{dx} = \\frac{df}{du} \\cdot \\frac{du}{dx}$.</strong></p>
+          <p>$\frac{du}{dx} = \frac{d}{dx}(x^2 + 1) = 2x + 0 = 2x$</p>
+          <p><strong>Step 4: Apply the Chain Rule: $\frac{df}{dx} = \frac{df}{du} \cdot \frac{du}{dx}$.</strong></p>
           <p>Substitute the derivatives found in Step 2 and Step 3:</p>
-          <p>$\\frac{df}{dx} = (3u^2) \\cdot (2x)$</p>
+          <p>$\frac{df}{dx} = (3u^2) \cdot (2x)$</p>
           <p><strong>Step 5: Substitute $u$ back in terms of $x$.</strong></p>
           <p>Recall $u = x^2 + 1$. Substitute this back into the expression:</p>
-          <p>$\\frac{df}{dx} = 3(x^2 + 1)^2 \\cdot (2x)$</p>
-          <p>$\\frac{df}{dx} = 6x(x^2 + 1)^2$</p>
+          <p>$\frac{df}{dx} = 3(x^2 + 1)^2 \cdot (2x)$</p>
+          <p>$\frac{df}{dx} = 6x(x^2 + 1)^2$</p>
           <p>Therefore, the derivative of $f(x) = (x^2 + 1)^3$ is $f'(x) = 6x(x^2 + 1)^2$.</p>
         </div>
       </div>
@@ -2050,12 +2050,12 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Apply the power rule and sum/difference rule.</strong></p>
-          <p>Recall that $\\frac{d}{dx}(ax^n) = anx^{n-1}$ and $\\frac{d}{dx}(c) = 0$ for a constant $c$.</p>
+          <p>Recall that $\frac{d}{dx}(ax^n) = anx^{n-1}$ and $\frac{d}{dx}(c) = 0$ for a constant $c$.</p>
           <p><strong>Step 2: Differentiate each term.</strong></p>
           <ul>
-            <li>$\\frac{d}{dx}(5x^3) = 5 \\cdot 3x^{3-1} = 15x^2$</li>
-            <li>$\\frac{d}{dx}(-2x) = -2 \\cdot 1x^{1-1} = -2x^0 = -2$</li>
-            <li>$\\frac{d}{dx}(7) = 0$</li>
+            <li>$\frac{d}{dx}(5x^3) = 5 \cdot 3x^{3-1} = 15x^2$</li>
+            <li>$\frac{d}{dx}(-2x) = -2 \cdot 1x^{1-1} = -2x^0 = -2$</li>
+            <li>$\frac{d}{dx}(7) = 0$</li>
           </ul>
           <p><strong>Step 3: Combine the derivatives.</strong></p>
           <p>$f'(x) = 15x^2 - 2 + 0$</p>
@@ -2066,50 +2066,50 @@
 
       <div class="exercise-card">
         <div class="exercise-question">
-          27. Find the derivative of $f(x) = \\ln(x^2 + 5)$.
+          27. Find the derivative of $f(x) = \ln(x^2 + 5)$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the derivative of $\\ln(u)$ and apply the Chain Rule.</strong></p>
-          <p>The derivative of $\\ln(u)$ with respect to $u$ is $\\frac{1}{u}$.</p>
-          <p>Let $u = x^2 + 5$. Then $\\frac{du}{dx} = 2x$.</p>
+          <p>The derivative of $\ln(u)$ with respect to $u$ is $\frac{1}{u}$.</p>
+          <p>Let $u = x^2 + 5$. Then $\frac{du}{dx} = 2x$.</p>
           <p><strong>Step 2: Apply the Chain Rule.</strong></p>
-          <p>$f'(x) = \\frac{1}{u} \\cdot \\frac{du}{dx}$</p>
-          <p>$f'(x) = \\frac{1}{x^2 + 5} \\cdot (2x)$</p>
+          <p>$f'(x) = \frac{1}{u} \cdot \frac{du}{dx}$</p>
+          <p>$f'(x) = \frac{1}{x^2 + 5} \cdot (2x)$</p>
           <p><strong>Step 3: Simplify.</strong></p>
-          <p>$f'(x) = \\frac{2x}{x^2 + 5}$</p>
-          <p>The derivative is $\\frac{2x}{x^2 + 5}$.</p>
+          <p>$f'(x) = \frac{2x}{x^2 + 5}$</p>
+          <p>The derivative is $\frac{2x}{x^2 + 5}$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          28. Evaluate $\\int x^5 dx$.
+          28. Evaluate $\int x^5 dx$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Apply the power rule for integration.</strong></p>
-          <p>$\\int x^n dx = \\frac{x^{n+1}}{n+1} + C$ for $n \\neq -1$.</p>
+          <p>$\int x^n dx = \frac{x^{n+1}}{n+1} + C$ for $n \neq -1$.</p>
           <p><strong>Step 2: Apply the rule with $n=5$.</strong></p>
-          <p>$\\int x^5 dx = \\frac{x^{5+1}}{5+1} + C$</p>
-          <p>$\\int x^5 dx = \\frac{x^6}{6} + C$</p>
-          <p>The integral is $\\frac{x^6}{6} + C$.</p>
+          <p>$\int x^5 dx = \frac{x^{5+1}}{5+1} + C$</p>
+          <p>$\int x^5 dx = \frac{x^6}{6} + C$</p>
+          <p>The integral is $\frac{x^6}{6} + C$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          29. Find the derivative of $f(x) = \\sin(x) + \\cos(x)$.
+          29. Find the derivative of $f(x) = \sin(x) + \cos(x)$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
-          <p><strong>Step 1: Recall the derivatives of $\\sin(x)$ and $\\cos(x)$.</strong></p>
-          <p>$\\frac{d}{dx}(\\sin(x)) = \\cos(x)$</p>
-          <p>$\\frac{d}{dx}(\\cos(x)) = -\\sin(x)$</p>
+          <p><strong>Step 1: Recall the derivatives of $\sin(x)$ and $\cos(x)$.</strong></p>
+          <p>$\frac{d}{dx}(\sin(x)) = \cos(x)$</p>
+          <p>$\frac{d}{dx}(\cos(x)) = -\sin(x)$</p>
           <p><strong>Step 2: Apply the sum rule for differentiation.</strong></p>
-          <p>$f'(x) = \\frac{d}{dx}(\\sin(x)) + \\frac{d}{dx}(\\cos(x))$</p>
-          <p>$f'(x) = \\cos(x) - \\sin(x)$</p>
-          <p>The derivative is $\\cos(x) - \\sin(x)$.</p>
+          <p>$f'(x) = \frac{d}{dx}(\sin(x)) + \frac{d}{dx}(\cos(x))$</p>
+          <p>$f'(x) = \cos(x) - \sin(x)$</p>
+          <p>The derivative is $\cos(x) - \sin(x)$.</p>
         </div>
       </div>
 
@@ -2123,8 +2123,8 @@
           <p><strong>Step 1: Identify $u$ and $v$ for the Product Rule.</strong></p>
           <p>Let $u = x^2$ and $v = e^x$.</p>
           <p><strong>Step 2: Find $u'$ and $v'$.</strong></p>
-          <p>$u' = \\frac{d}{dx}(x^2) = 2x$</p>
-          <p>$v' = \\frac{d}{dx}(e^x) = e^x$</p>
+          <p>$u' = \frac{d}{dx}(x^2) = 2x$</p>
+          <p>$v' = \frac{d}{dx}(e^x) = e^x$</p>
           <p><strong>Step 3: Apply the Product Rule: $(uv)' = u'v + uv'$.</strong></p>
           <p>$g'(x) = (2x)(e^x) + (x^2)(e^x)$</p>
           <p><strong>Step 4: Factor out common terms (optional, but good practice).</strong></p>
@@ -2146,8 +2146,8 @@
           <p><strong>Step 2: Find derivatives of outer and inner functions.</strong></p>
           <p>$g'(u) = e^u$</p>
           <p>$u'(x) = 2x + 3$</p>
-          <p><strong>Step 3: Apply the Chain Rule: $f'(x) = g'(u(x)) \\cdot u'(x)$.</strong></p>
-          <p>$f'(x) = e^{x^2 + 3x} \\cdot (2x + 3)$</p>
+          <p><strong>Step 3: Apply the Chain Rule: $f'(x) = g'(u(x)) \cdot u'(x)$.</strong></p>
+          <p>$f'(x) = e^{x^2 + 3x} \cdot (2x + 3)$</p>
           <p><strong>Step 4: Simplify.</strong></p>
           <p>$f'(x) = (2x + 3)e^{x^2 + 3x}$</p>
         </div>
@@ -2160,11 +2160,11 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Find the first derivative ($f'(x)$).</strong></p>
-          <p>$f'(x) = \\frac{d}{dx}(x^4 - 2x^2 + 5)$</p>
+          <p>$f'(x) = \frac{d}{dx}(x^4 - 2x^2 + 5)$</p>
           <p>$f'(x) = 4x^3 - 4x$</p>
           <p><strong>Step 2: Find the second derivative ($f''(x)$) by differentiating $f'(x)$.</strong></p>
-          <p>$f''(x) = \\frac{d}{dx}(4x^3 - 4x)$</p>
-          <p>$f''(x) = 4 \\cdot 3x^2 - 4 \\cdot 1$</p>
+          <p>$f''(x) = \frac{d}{dx}(4x^3 - 4x)$</p>
+          <p>$f''(x) = 4 \cdot 3x^2 - 4 \\cdot 1$</p>
           <p>$f''(x) = 12x^2 - 4$</p>
           <p>The second derivative of $f(x)$ is $12x^2 - 4$.</p>
         </div>
@@ -2172,42 +2172,42 @@
 
       <div class="exercise-card">
         <div class="exercise-question">
-          33. Find the derivative of $f(x) = \\frac{e^x}{x^2}$.
+          33. Find the derivative of $f(x) = \frac{e^x}{x^2}$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Identify $u$ and $v$ for the Quotient Rule.</strong></p>
           <p>Let $u = e^x$ and $v = x^2$.</p>
           <p><strong>Step 2: Find $u'$ and $v'$.</strong></p>
-          <p>$u' = \\frac{d}{dx}(e^x) = e^x$</p>
-          <p>$v' = \\frac{d}{dx}(x^2) = 2x$</p>
-          <p><strong>Step 3: Apply the Quotient Rule: $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$.</strong></p>
-          <p>$f'(x) = \\frac{(e^x)(x^2) - (e^x)(2x)}{(x^2)^2}$</p>
+          <p>$u' = \frac{d}{dx}(e^x) = e^x$</p>
+          <p>$v' = \frac{d}{dx}(x^2) = 2x$</p>
+          <p><strong>Step 3: Apply the Quotient Rule: $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$.</strong></p>
+          <p>$f'(x) = \frac{(e^x)(x^2) - (e^x)(2x)}{(x^2)^2}$</p>
           <p><strong>Step 4: Simplify the expression.</strong></p>
-          <p>$f'(x) = \\frac{x^2 e^x - 2x e^x}{x^4}$</p>
-          <p>$f'(x) = \\frac{x e^x (x - 2)}{x^4}$</p>
-          <p>$f'(x) = \\frac{e^x (x - 2)}{x^3}$</p>
-          <p>The derivative is $\\frac{e^x (x - 2)}{x^3}$.</p>
+          <p>$f'(x) = \frac{x^2 e^x - 2x e^x}{x^4}$</p>
+          <p>$f'(x) = \frac{x e^x (x - 2)}{x^4}$</p>
+          <p>$f'(x) = \frac{e^x (x - 2)}{x^3}$</p>
+          <p>The derivative is $\frac{e^x (x - 2)}{x^3}$.</p>
         </div>
       </div>
 
       <h4>Hard Exercises</h4>
       <div class="exercise-card">
         <div class="exercise-question">
-          34. Find the derivative of $h(x) = \\frac{\\sin(x)}{x}$.
+          34. Find the derivative of $h(x) = \frac{\sin(x)}{x}$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Identify $u$ and $v$ for the Quotient Rule.</strong></p>
-          <p>Let $u = \\sin(x)$ and $v = x$.</p>
+          <p>Let $u = \sin(x)$ and $v = x$.</p>
           <p><strong>Step 2: Find $u'$ and $v'$.</strong></p>
-          <p>$u' = \\frac{d}{dx}(\\sin(x)) = \\cos(x)$</p>
-          <p>$v' = \\frac{d}{dx}(x) = 1$</p>
-          <p><strong>Step 3: Apply the Quotient Rule: $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$.</strong></p>
-          <p>$h'(x) = \\frac{(\\cos(x))(x) - (\\sin(x))(1)}{x^2}$</p>
+          <p>$u' = \frac{d}{dx}(\sin(x)) = \cos(x)$</p>
+          <p>$v' = \frac{d}{dx}(x) = 1$</p>
+          <p><strong>Step 3: Apply the Quotient Rule: $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$.</strong></p>
+          <p>$h'(x) = \frac{(\cos(x))(x) - (\sin(x))(1)}{x^2}$</p>
           <p><strong>Step 4: Simplify the expression.</strong></p>
-          <p>$h'(x) = \\frac{x\\cos(x) - \\sin(x)}{x^2}$</p>
-          <p>The derivative of $h(x)$ is $\\frac{x\\cos(x) - \\sin(x)}{x^2}$.</p>
+          <p>$h'(x) = \frac{x\cos(x) - \sin(x)}{x^2}$</p>
+          <p>The derivative of $h(x)$ is $\frac{x\cos(x) - \sin(x)}{x^2}$.</p>
         </div>
       </div>
 
@@ -2218,51 +2218,51 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Treat $y$ as a constant and differentiate with respect to $x$.</strong></p>
-          <p>Recall that $\\frac{\\partial}{\\partial x}(c \\cdot g(x)) = c \\cdot g'(x)$ and $\\frac{\\partial}{\\partial x}(h(y)) = 0$.</p>
+          <p>Recall that $\frac{\partial}{\partial x}(c \cdot g(x)) = c \cdot g'(x)$ and $\frac{\partial}{\partial x}(h(y)) = 0$.</p>
           <p><strong>Step 2: Differentiate each term with respect to $x$.</strong></p>
           <ul>
-            <li>For $3x^2y$: Treat $3y$ as a constant. $\\frac{\\partial}{\\partial x}(3x^2y) = 3y \\cdot \\frac{d}{dx}(x^2) = 3y(2x) = 6xy$</li>
-            <li>For $2xy^3$: Treat $2y^3$ as a constant. $\\frac{\\partial}{\\partial x}(2xy^3) = 2y^3 \\cdot \\frac{d}{dx}(x) = 2y^3(1) = 2y^3$</li>
-            <li>For $-5x$: $\\frac{\\partial}{\\partial x}(-5x) = -5$</li>
+            <li>For $3x^2y$: Treat $3y$ as a constant. $\frac{\partial}{\partial x}(3x^2y) = 3y \cdot \frac{d}{dx}(x^2) = 3y(2x) = 6xy$</li>
+            <li>For $2xy^3$: Treat $2y^3$ as a constant. $\frac{\partial}{\partial x}(2xy^3) = 2y^3 \cdot \frac{d}{dx}(x) = 2y^3(1) = 2y^3$</li>
+            <li>For $-5x$: $\frac{\partial}{\partial x}(-5x) = -5$</li>
           </ul>
           <p><strong>Step 3: Combine the partial derivatives.</strong></p>
-          <p>$\\frac{\\partial f}{\\partial x} = 6xy + 2y^3 - 5$</p>
+          <p>$\frac{\partial f}{\partial x} = 6xy + 2y^3 - 5$</p>
           <p>The partial derivative of $f(x, y)$ with respect to $x$ is $6xy + 2y^3 - 5$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          36. Find $\\frac{\\partial}{\\partial y} f(x, y, z)$ for $f(x, y, z) = x^2 \\sin(y) + z^3 y^2 - 7x z$.
+          36. Find $\frac{\partial}{\partial y} f(x, y, z)$ for $f(x, y, z) = x^2 \sin(y) + z^3 y^2 - 7x z$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Treat $x$ and $z$ as constants and differentiate with respect to $y$.</strong></p>
           <p><strong>Step 2: Differentiate each term with respect to $y$.</strong></p>
           <ul>
-            <li>For $x^2 \\sin(y)$: Treat $x^2$ as constant. $\\frac{\\partial}{\\partial y}(x^2 \\sin(y)) = x^2 \\cos(y)$</li>
-            <li>For $z^3 y^2$: Treat $z^3$ as constant. $\\frac{\\partial}{\\partial y}(z^3 y^2) = z^3 (2y) = 2yz^3$</li>
+            <li>For $x^2 \sin(y)$: Treat $x^2$ as constant. $\frac{\partial}{\partial y}(x^2 \sin(y)) = x^2 \cos(y)$</li>
+            <li>For $z^3 y^2$: Treat $z^3$ as constant. $\frac{\partial}{\partial y}(z^3 y^2) = z^3 (2y) = 2yz^3$</li>
             <li>For $-7xz$: This term does not contain $y$, so its partial derivative with respect to $y$ is 0.</li>
           </ul>
           <p><strong>Step 3: Combine the partial derivatives.</strong></p>
-          <p>$\\frac{\\partial f}{\\partial y} = x^2 \\cos(y) + 2yz^3$</p>
-          <p>The partial derivative is $x^2 \\cos(y) + 2yz^3$.</p>
+          <p>$\frac{\partial f}{\partial y} = x^2 \cos(y) + 2yz^3$</p>
+          <p>The partial derivative is $x^2 \cos(y) + 2yz^3$.</p>
         </div>
       </div>
 
       <div class="exercise-card">
         <div class="exercise-question">
-          37. Find $\\frac{\\partial^2 f}{\\partial x^2}$ for $f(x, y) = x^3y^2 - 2x^2 + 5y$.
+          37. Find $\frac{\partial^2 f}{\partial x^2}$ for $f(x, y) = x^3y^2 - 2x^2 + 5y$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Find the first partial derivative with respect to $x$.</strong></p>
-          <p>$\\frac{\\partial f}{\\partial x} = \\frac{\\partial}{\\partial x}(x^3y^2 - 2x^2 + 5y)$</p>
-          <p>$\\frac{\\partial f}{\\partial x} = 3x^2y^2 - 4x$</p>
+          <p>$\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}(x^3y^2 - 2x^2 + 5y)$</p>
+          <p>$\frac{\partial f}{\partial x} = 3x^2y^2 - 4x$</p>
           <p><strong>Step 2: Find the second partial derivative with respect to $x$ by differentiating the first partial derivative (from Step 1) with respect to $x$ again.</strong></p>
-          <p>$\\frac{\\partial^2 f}{\\partial x^2} = \\frac{\\partial}{\\partial x}(3x^2y^2 - 4x)$</p>
-          <p>$\\frac{\\partial^2 f}{\\partial x^2} = 3y^2 \\cdot 2x - 4$</p>
-          <p>$\\frac{\\partial^2 f}{\\partial x^2} = 6xy^2 - 4$</p>
+          <p>$\frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x}(3x^2y^2 - 4x)$</p>
+          <p>$\frac{\partial^2 f}{\partial x^2} = 3y^2 \cdot 2x - 4$</p>
+          <p>$\frac{\partial^2 f}{\partial x^2} = 6xy^2 - 4$</p>
           <p>The second partial derivative is $6xy^2 - 4$.</p>
         </div>
       </div>
@@ -2272,16 +2272,16 @@
       <h4>Easy Exercises</h4>
       <div class="exercise-card">
         <div class="exercise-question">
-          38. Perform one step of gradient descent for the function $f(x) = x^2$ starting at $x_0 = 3$ with a learning rate $\\alpha = 0.1$.
+          38. Perform one step of gradient descent for the function $f(x) = x^2$ starting at $x_0 = 3$ with a learning rate $\alpha = 0.1$.
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Find the derivative (gradient) of the function.</strong></p>
-          <p>$f'(x) = \\frac{d}{dx}(x^2) = 2x$</p>
+          <p>$f'(x) = \frac{d}{dx}(x^2) = 2x$</p>
           <p><strong>Step 2: Calculate the gradient at the initial point $x_0$.</strong></p>
           <p>$f'(3) = 2(3) = 6$</p>
           <p><strong>Step 3: Apply the gradient descent update rule.</strong></p>
-          <p>$x_{new} = x_{old} - \\alpha \\cdot f'(x_{old})$</p>
+          <p>$x_{new} = x_{old} - \alpha \cdot f'(x_{old})$</p>
           <p>$x_1 = 3 - (0.1)(6)$</p>
           <p>$x_1 = 3 - 0.6$</p>
           <p>$x_1 = 2.4$</p>
@@ -2291,23 +2291,23 @@
 
       <div class="exercise-card">
         <div class="exercise-question">
-          39. A model parameter $\\theta$ is at 2.0. Its gradient with respect to the loss is 0.5. If the learning rate $\\alpha = 0.01$, what is the new value of $\\theta$ after one gradient descent step?
+          39. A model parameter $\theta$ is at 2.0. Its gradient with respect to the loss is 0.5. If the learning rate $\alpha = 0.01$, what is the new value of $\theta$ after one gradient descent step?
         </div>
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the gradient descent update rule.</strong></p>
-          <p>$\\theta_{new} = \\theta_{old} - \\alpha \\cdot \\nabla L(\\theta_{old})$</p>
-          <p>where $\\nabla L(\\theta_{old})$ is the gradient of the loss with respect to $\\theta$ at the current $\\theta_{old}$.</p>
+          <p>$\theta_{new} = \theta_{old} - \alpha \cdot \nabla L(\theta_{old})$</p>
+          <p>where $\nabla L(\theta_{old})$ is the gradient of the loss with respect to $\theta$ at the current $\theta_{old}$.</p>
           <p><strong>Step 2: Substitute the given values.</strong></p>
           <ul>
-            <li>$\\theta_{old} = 2.0$</li>
-            <li>$\\nabla L(\\theta_{old}) = 0.5$</li>
-            <li>$\\alpha = 0.01$</li>
+            <li>$\theta_{old} = 2.0$</li>
+            <li>$\nabla L(\theta_{old}) = 0.5$</li>
+            <li>$\alpha = 0.01$</li>
           </ul>
-          <p>$\\theta_{new} = 2.0 - (0.01)(0.5)$</p>
-          <p>$\\theta_{new} = 2.0 - 0.005$</p>
-          <p>$\\theta_{new} = 1.995$</p>
-          <p>The new value of $\\theta$ is 1.995.</p>
+          <p>$\theta_{new} = 2.0 - (0.01)(0.5)$</p>
+          <p>$\theta_{new} = 2.0 - 0.005$</p>
+          <p>$\theta_{new} = 1.995$</p>
+          <p>The new value of $\theta$ is 1.995.</p>
         </div>
       </div>
 
@@ -2319,15 +2319,15 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall the definition of the gradient.</strong></p>
-          <p>For a function $f(x, y)$, the gradient $\\nabla f(x,y)$ is the vector of its partial derivatives:</p>
-          <p>$\\nabla f(x,y) = \\begin{pmatrix} \\frac{\\partial f}{\\partial x} \\\\\\\\ \\frac{\\partial f}{\\partial y} \\end{pmatrix}$</p>
+          <p>For a function $f(x, y)$, the gradient $\nabla f(x,y)$ is the vector of its partial derivatives:</p>
+          <p>$\nabla f(x,y) = \begin{pmatrix} \frac{\partial f}{\partial x} \\\\\\\\ \frac{\partial f}{\partial y} \end{pmatrix}$</p>
           <p><strong>Step 2: Calculate the partial derivative with respect to $x$.</strong></p>
-          <p>Treat $y$ as a constant: $\\frac{\\partial f}{\\partial x} = \\frac{\\partial}{\\partial x}(x^2 + 2y^2) = 2x + 0 = 2x$</p>
+          <p>Treat $y$ as a constant: $\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}(x^2 + 2y^2) = 2x + 0 = 2x$</p>
           <p><strong>Step 3: Calculate the partial derivative with respect to $y$.</strong></p>
-          <p>Treat $x$ as a constant: $\\frac{\\partial f}{\\partial y} = \\frac{\\partial}{\\partial y}(x^2 + 2y^2) = 0 + 4y = 4y$</p>
+          <p>Treat $x$ as a constant: $\frac{\partial f}{\partial y} = \frac{\partial}{\partial y}(x^2 + 2y^2) = 0 + 4y = 4y$</p>
           <p><strong>Step 4: Form the gradient vector.</strong></p>
-          <p>$\\nabla f(x,y) = \\begin{pmatrix} 2x \\\\\\\\ 4y \\end{pmatrix}$</p>
-          <p>The gradient of $f(x, y)$ is $\\begin{pmatrix} 2x \\\\\\\\ 4y \\end{pmatrix}$.</p>
+          <p>$\nabla f(x,y) = \begin{pmatrix} 2x \\\\\\\\ 4y \end{pmatrix}$</p>
+          <p>The gradient of $f(x, y)$ is $\begin{pmatrix} 2x \\\\\\\\ 4y \end{pmatrix}$.</p>
         </div>
       </div>
 
@@ -2338,7 +2338,7 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Find the derivative (gradient) of the function.</strong></p>
-          <p>$f'(x) = \\frac{d}{dx}((x-2)^2) = 2(x-2) \\cdot 1 = 2x - 4$ (using Chain Rule)</p>
+          <p>$f'(x) = \frac{d}{dx}((x-2)^2) = 2(x-2) \cdot 1 = 2x - 4$ (using Chain Rule)</p>
           <p><strong>Step 2: Set the gradient to zero and solve for $x$.</strong></p>
           <p>$2x - 4 = 0$</p>
           <p>$2x = 4$</p>
@@ -2355,15 +2355,15 @@
         <button class="solution-button" onclick="toggleSolution(this)">Show Solution</button>
         <div class="exercise-solution">
           <p><strong>Step 1: Recall gradient definition.</strong></p>
-          <p>$\\nabla f = \\begin{pmatrix} \\frac{\\partial f}{\\partial x} \\\\\\\\ \\frac{\\partial f}{\\partial y} \\\\\\\\ \\frac{\\partial f}{\\partial z} \\end{pmatrix}$</p>
+          <p>$\nabla f = \begin{pmatrix} \frac{\partial f}{\partial x} \\\\\\\\ \frac{\partial f}{\partial y} \\\\\\\\ \frac{\partial f}{\partial z} \end{pmatrix}$</p>
           <p><strong>Step 2: Calculate partial derivative with respect to $x$.</strong></p>
-          <p>$\\frac{\\partial f}{\\partial x} = \\frac{\\partial}{\\partial x}(x^2y + y^3z + z^2) = 2xy$</p>
+          <p>$\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}(x^2y + y^3z + z^2) = 2xy$</p>
           <p><strong>Step 3: Calculate partial derivative with respect to $y$.</strong></p>
-          <p>$\\frac{\\partial f}{\\partial y} = \\frac{\\partial}{\\partial y}(x^2y + y^3z + z^2) = x^2 + 3y^2z$</p>
+          <p>$\frac{\partial f}{\partial y} = \frac{\partial}{\partial y}(x^2y + y^3z + z^2) = x^2 + 3y^2z$</p>
           <p><strong>Step 4: Calculate partial derivative with respect to $z$.</strong></p>
-          <p>$\\frac{\\partial f}{\\partial z} = \\frac{\\partial}{\\partial z}(x^2y + y^3z + z^2) = y^3 + 2z$</p>
+          <p>$\frac{\partial f}{\partial z} = \frac{\partial}{\partial z}(x^2y + y^3z + z^2) = y^3 + 2z$</p>
           <p><strong>Step 5: Form the gradient vector.</strong></p>
-          <p>$\\nabla f(x, y, z) = \\begin{pmatrix} 2xy \\\\\\\\ x^2 + 3y^2z \\\\\\\\ y^3 + 2z \\end{pmatrix}$</p>
+          <p>$\nabla f(x, y, z) = \begin{pmatrix} 2xy \\\\\\\\ x^2 + 3y^2z \\\\\\\\ y^3 + 2z \end{pmatrix}$</p>
         </div>
       </div>
 
@@ -2376,11 +2376,11 @@
           <p><strong>Step 1: Identify the objective function and the constraint function.</strong></p>
           <p>Objective function: $f(x, y) = x^2 + y^2$</p>
           <p>Constraint function: $g(x, y) = x + y - 1 = 0$</p>
-          <p><strong>Step 2: Introduce the Lagrange multiplier $\\lambda$.</strong></p>
-          <p>The Lagrangian $\\mathcal{L}(x, y, \\lambda)$ is formed by combining the objective function and the constraint function with the Lagrange multiplier:</p>
-          <p>$\\mathcal{L}(x, y, \\lambda) = f(x, y) - \\lambda g(x, y)$</p>
+          <p><strong>Step 2: Introduce the Lagrange multiplier $\lambda$.</strong></p>
+          <p>The Lagrangian $\mathcal{L}(x, y, \lambda)$ is formed by combining the objective function and the constraint function with the Lagrange multiplier:</p>
+          <p>$\mathcal{L}(x, y, \lambda) = f(x, y) - \lambda g(x, y)$</p>
           <p><strong>Step 3: Substitute the given functions into the Lagrangian formula.</strong></p>
-          <p>$\\mathcal{L}(x, y, \\lambda) = (x^2 + y^2) - \\lambda (x + y - 1)$</p>
+          <p>$\mathcal{L}(x, y, \lambda) = (x^2 + y^2) - \lambda (x + y - 1)$</p>
           <p>This is the Lagrangian for the given constrained optimization problem.</p>
         </div>
       </div>
@@ -2395,8 +2395,8 @@
           <p>Objective function: $f(x, y, z) = xyz$</p>
           <p>Constraint function: $g(x, y, z) = x + y + z - 1 = 0$</p>
           <p><strong>Step 2: Form the Lagrangian.</strong></p>
-          <p>$\\mathcal{L}(x, y, z, \\lambda) = f(x, y, z) - \\lambda g(x, y, z)$</p>
-          <p>$\\mathcal{L}(x, y, z, \\lambda) = xyz - \\lambda(x + y + z - 1)$</p>
+          <p>$\mathcal{L}(x, y, z, \lambda) = f(x, y, z) - \lambda g(x, y, z)$</p>
+          <p>$\mathcal{L}(x, y, z, \lambda) = xyz - \lambda(x + y + z - 1)$</p>
           <p>This is the Lagrangian for the problem.</p>
         </div>
       </div>
@@ -2411,13 +2411,13 @@
           <p><strong>Explanation (Geometric):</strong></p>
           <p>A function is convex if, for any two points on its graph, the line segment connecting these two points lies entirely on or above the graph of the function. If you draw the graph of $f(x) = |x|$, which is a V-shape with its vertex at the origin, you'll observe that any line segment connecting two points on this V-shape will always be above or on the V-shape itself.</p>
           <p><strong>Explanation (Mathematical):</strong></p>
-          <p>A continuously differentiable function is convex if its second derivative is non-negative ($f''(x) \\ge 0$). For $f(x) = |x|$:</p>
+          <p>A continuously differentiable function is convex if its second derivative is non-negative ($f''(x) \ge 0$). For $f(x) = |x|$:</p>
           <ul>
             <li>For $x > 0$, $f(x) = x$, so $f'(x) = 1$ and $f''(x) = 0$.</li>
             <li>For $x < 0$, $f(x) = -x$, so $f'(x) = -1$ and $f''(x) = 0$.</li>
           </ul>
-          <p>At $x=0$, the function is not differentiable in the classical sense (it has a sharp corner). However, the definition of convexity extends to non-differentiable functions. A more general definition states that for a function $f$ to be convex, for any $x, y$ in its domain and any $\\alpha \\in [0, 1]$:</p>
-          <p>$f(\\alpha x + (1 - \\alpha)y) \\le \\alpha f(x) + (1 - \\alpha)f(y)$</p>
+          <p>At $x=0$, the function is not differentiable in the classical sense (it has a sharp corner). However, the definition of convexity extends to non-differentiable functions. A more general definition states that for a function $f$ to be convex, for any $x, y$ in its domain and any $\alpha \in [0, 1]$:</p>
+          <p>$f(\alpha x + (1 - \alpha)y) \le \alpha f(x) + (1 - \alpha)f(y)$</p>
           <p>This property holds true for $f(x) = |x|$, which can be proven using the triangle inequality. The subgradient for $f(x)=|x|$ at $x=0$ is any value in $[-1, 1]$, and the function satisfies the first-order convexity condition for all $x$.</p>
         </div>
       </div>
